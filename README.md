@@ -5,3 +5,12 @@ The “EasyWay" web application aims to aggregate utility services such as beaut
 ## Design
 
 The frontend of EasyWay will be implemented using Angular JS. Users should thus be able to view and interact with EasyWay within all supported browsers. The backend of EasyWay is implemented using Node JS, with Express JS as its web framework. And the database system which we are going to be used will be MongoDB.
+
+## File Structure
+
+Our application is structured as follows:
+
+| File Name   | Description                                                            |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ProjectDocs      | This folder contains all the Project Deliverable files featured on the project Wiki page.    
+| TeamPhotos   | This folder contains the photos of each team member that are used on the project Wiki page.     
