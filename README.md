@@ -13,4 +13,7 @@ Our application is structured as follows:
 | File Name   | Description                                                            |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ProjectDocs      | This folder contains all the Project Deliverable files featured on the project Wiki page.    
-| TeamPhotos   | This folder contains the photos of each team member that are used on the project Wiki page.     
+| TeamPhotos   | This folder contains the photos of each team member that are used on the project Wiki page.   
+| client   | This folder contains the codes for Front End.   
+| db   | This folder contains the database schema and dummy data.   
+| server   | This folder contains the codes for Back End server.  
