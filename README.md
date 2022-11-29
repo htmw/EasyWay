@@ -64,7 +64,7 @@ Ignore any errors as it will check for required datatables (show the error), the
 
 ## Running Frontend Server:
 
-Link : https://easywayapp.netlify.app/home
+Link : https://easywayapp.netlify.app
 
 * Clone the repository
 ```
