@@ -48,7 +48,7 @@ mysql -u root -p
 ```
 Enter mysql password, then run:
 ```
-create database;
+create database easyWay;
 ```
 * Goto config.go and update your mysql password
 ```
