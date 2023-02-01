@@ -33,13 +33,13 @@ Link : https://github.com/users/ksharma67/projects/2
 
 ## API Documentation:
 
-Link : https://github.com/ksharma67/EasyWay/blob/main/API%20Documentation.md
+Link : https://github.com/htmw/EasyWay/blob/main/API%20Documentation.md
 
 ## Running Backend Server:
 
 * Clone the repository
 ```
-git clone https://github.com/ksharma67/EasyWay.git
+git clone https://github.com/htmw/EasyWay.git
 ```
 * Make sure you have mysql installed and correctly set up.
 * Create a new database in MySQL using:
