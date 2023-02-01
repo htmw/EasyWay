@@ -68,7 +68,7 @@ Link : https://easywayapp.netlify.app
 
 * Clone the repository
 ```
-git clone https://github.com/ksharma67/EasyWay.git
+git clone https://github.com/htmw/EasyWay.git
 ```
 * Install NodeJS LTS version from https://nodejs.org/en/ for your Operating System.
 * Navigate to client folder and install required libraries:
