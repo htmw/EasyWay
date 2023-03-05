@@ -27,10 +27,6 @@ Our application is structured as follows:
 * Version Control: Git
 * Code Editor : Visual Studio Code
 
-## Project Board:
-
-Link : https://github.com/users/ksharma67/projects/2
-
 ## API Documentation:
 
 Link : https://github.com/htmw/EasyWay/blob/main/API%20Documentation.md
