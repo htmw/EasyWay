@@ -41,3 +41,14 @@ type CityServiceMapping struct {
 	CityName  string `gorm:"size:200" json:"cityname"`
 	ServiceId uint   `gorm:"size:10" json:"service_id"`
 }
+
+//ResetPasswordRequest
+type ResetPasswordRequest struct {
+    Email string `gorm:"size:50" json:"email"`
+}
+
+//ResetPasswordData
+type ResetPasswordData struct {
+    Token string `json:"token"`
+    Password string `gorm:"size:20" json:"password"`
+}

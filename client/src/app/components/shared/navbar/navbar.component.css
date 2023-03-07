@@ -1,4 +1,16 @@
 /* Header */
+
+input[type="text"] {
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  padding: 0px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 500px;
+  height: 40px;
+  background-color: #ccc;
+  margin-left: 10px;
+}
 a {
   text-decoration: none;
 }

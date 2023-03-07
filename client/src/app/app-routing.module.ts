@@ -11,6 +11,8 @@ import { ServiceBookingComponent } from './components/service-booking/service-bo
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotUsernameComponent } from './components/forgot-username/forgot-username.component';
 
 const routes: Routes = [
   {
@@ -25,10 +27,10 @@ const routes: Routes = [
     path: 'home',
     component: LandingComponent
   },
-  { 
+  {
     path: '',
-    redirectTo: '/home', 
-    pathMatch: 'full' 
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
   {
     path: 'services',
@@ -42,13 +44,21 @@ const routes: Routes = [
     path: 'bookService',
     component: ServiceBookingComponent
   },
-  { 
+  {
     path: 'logout',
-    component: LogoutComponent 
+    component: LogoutComponent
   },
-  { 
+  {
     path: 'profile',
-    component: UserProfileComponent 
+    component: UserProfileComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'forgot-username',
+    component: ForgotUsernameComponent
   }
 ];
 

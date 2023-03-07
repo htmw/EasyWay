@@ -172,6 +172,11 @@ h2 {
 .content .forgot-pass {
   position: relative;
   top: 2px;
+  font-size: 14.5px;
+}
+.content .forgot-username {
+  position: relative;
+  top: 2px;
   font-size: 14px;
 }
 

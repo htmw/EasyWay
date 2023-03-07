@@ -12,6 +12,8 @@ import { ServiceBookingComponent } from './components/service-booking/service-bo
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotUsernameComponent } from './components/forgot-username/forgot-username.component';
 // import * as $ from 'jquery';
 
 @NgModule({
@@ -24,13 +26,15 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     ServiceBookingComponent,
     NavbarComponent,
     FooterComponent,
-    BookingsComponent
+    BookingsComponent,
+    ForgotPasswordComponent,
+    ForgotUsernameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule  
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

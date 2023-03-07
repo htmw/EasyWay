@@ -7,7 +7,6 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-
 export class NavbarComponent implements OnInit {
 
   isLoggedIn:boolean = false;
@@ -15,12 +14,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private http: HttpClient,public router:Router) { }
 
-
   ngOnInit(): void {
     if (localStorage.getItem('isLoggedIn') == 'true') {
       this.isLoggedIn = true;
-    }
-    else {
+    } else {
       this.isLoggedIn = false;
     }
 
@@ -29,10 +26,15 @@ export class NavbarComponent implements OnInit {
         this.currentRoute = event.url;
       }
     });
-
-    // this.currentRoute = this.router.url;
-    // console.log('Hi');
-    // console.log(this.currentRoute);
   }
 
+  searchServices(event: Event) {
+    const query = (event.target as HTMLInputElement)?.value;
+    if (query && query.length >= 3) { // only search if the query is at least 3 characters long
+      this.http.get('/api/searchServices?q=' + query).subscribe((data: any) => {
+        // display the search results in the console for now
+        console.log(data);
+      });
+    }
+  }
 }

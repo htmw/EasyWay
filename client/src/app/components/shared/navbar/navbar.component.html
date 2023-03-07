@@ -2,6 +2,13 @@
   <h3><a routerLink="/home">EasyWay</a></h3>
   <nav id="nav">
     <ul>
+       <i class="fa fa-search"></i>
+
+      <li>
+        <form action="" method="get">
+          <input type="text" placeholder="Search Services" id="search-input" (keyup)="searchServices($event)" />
+        </form>
+      </li>
       <li style="white-space: nowrap;"><a href="index.html">Home</a></li>
       <li style="white-space: nowrap;">
         <a routerLink="/services" routerLinkActive="active">Book a Service</a>
