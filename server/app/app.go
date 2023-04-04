@@ -12,6 +12,7 @@ import (
 	"github.com/ksharma67/EasyWay/server/app/model"
 	"github.com/ksharma67/EasyWay/server/config"
 	"gopkg.in/gomail.v2"
+	"io/ioutil"
 	//"gorm.io/driver/sqlite"
 )
 
@@ -227,4 +228,31 @@ func (a *App) ForgotUsername(w http.ResponseWriter, r *http.Request) {
 
 	// Inform the user that their username(s) have been sent
 	fmt.Fprint(w, "Your username(s) have been sent to your email.")
+}
+
+func handleUpload(w http.ResponseWriter, r *http.Request) {
+    err := r.ParseMultipartForm(32 << 20) // 32MB max request size
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    file, header, err := r.FormFile("file")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+    defer file.Close()
+
+    // Read the file data
+    fileBytes, err := ioutil.ReadAll(file)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Send the file data as a response
+    w.Header().Set("Content-Disposition", "attachment; filename="+header.Filename)
+    w.Header().Set("Content-Type", r.Header.Get("Content-Type"))
+    w.Write(fileBytes)
 }

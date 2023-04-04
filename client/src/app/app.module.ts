@@ -14,6 +14,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotUsernameComponent } from './components/forgot-username/forgot-username.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { UploadComponent } from './components/upload/upload.component';
 // import * as $ from 'jquery';
 
 @NgModule({
@@ -28,7 +30,9 @@ import { ForgotUsernameComponent } from './components/forgot-username/forgot-use
     FooterComponent,
     BookingsComponent,
     ForgotPasswordComponent,
-    ForgotUsernameComponent
+    ForgotUsernameComponent,
+    BlogComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

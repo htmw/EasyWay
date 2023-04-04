@@ -1,9 +1,8 @@
-<header id="header" [ngClass]="this.currentRoute == '/' || this.currentRoute == '/home' || this.currentRoute == '/services' || this.currentRoute == '/bookings' ? 'alt' : 'nav-alt'">
+<header id="header" [ngClass]="this.currentRoute == '/' || this.currentRoute == '/home' || this.currentRoute == '/blog' || this.currentRoute == '/upload' || this.currentRoute == '/services' || this.currentRoute == '/bookings' ? 'alt' : 'nav-alt'">
   <h3><a routerLink="/home">EasyWay</a></h3>
   <nav id="nav">
     <ul>
        <i class="fa fa-search"></i>
-
       <li>
         <form action="" method="get">
           <input type="text" placeholder="Search Services" id="search-input" (keyup)="searchServices($event)" />
@@ -11,7 +10,9 @@
       </li>
       <li style="white-space: nowrap;"><a href="index.html">Home</a></li>
       <li style="white-space: nowrap;">
+        <i class="fa fa-camera" aria-hidden="true" routerLink="/upload"></i>
         <a routerLink="/services" routerLinkActive="active">Book a Service</a>
+        <a routerLink="/blog" routerLinkActive="active">Blog</a>
       </li>
       <li *ngIf="isLoggedIn; else loggedOut" style="white-space: nowrap;">
         <a routerLink="/bookings" routerLinkActive="active">My Bookings</a>

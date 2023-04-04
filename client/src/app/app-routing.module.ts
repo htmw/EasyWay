@@ -13,6 +13,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotUsernameComponent } from './components/forgot-username/forgot-username.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'blog',
+    component: BlogComponent
   },
   {
     path: 'services',
@@ -59,6 +65,10 @@ const routes: Routes = [
   {
     path: 'forgot-username',
     component: ForgotUsernameComponent
+  },
+  {
+    path: 'upload',
+    component: UploadComponent
   }
 ];
 
