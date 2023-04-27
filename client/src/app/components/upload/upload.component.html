@@ -1,22 +1,22 @@
 <header class="bg-dark py-5 service-header">
-    <div class="container px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Upload a picture</h1>
-        </div>
+  <div class="container px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Upload a Picture</h1>
     </div>
+  </div>
 </header>
-
+<br>
 <div class="upload">
-  <h2>Upload a File</h2>
-  <form>
-    <div>
+  <form (submit)="onSubmit($event)">
+    <div class="file-input-wrapper">
+      <input type="file" id="file" name="file" (change)="onFileSelected($event)" accept="image/*" />
       <label for="file">
-  <i class="fas fa-upload"></i>
-  Select a file
-</label>
-
-      <input type="file" id="file" name="file" />
+        <i class="fas fa-upload"></i> Select a file
+      </label>
     </div>
+    <img class="preview" *ngIf="selectedFile" [src]="selectedFileUrl" />
     <button type="submit">Upload</button>
+    <div *ngIf="uploadSuccess">Upload successful!</div>
+    <div *ngIf="errorMessage">{{ errorMessage }}</div>
   </form>
 </div>

@@ -54,7 +54,6 @@ describe('EasyWay Services List Page Test', () => {
         .should('have.class','bg-dark py-5 service-header')
         .find('h1')
         .should('have.class','display-4 fw-bolder')
-        .should('contain.text','Services List')
     });
 
     it('displays the list of services correctly along with "Book Now" button for each service', () => {

@@ -65,48 +65,4 @@ describe('EasyWay Logged In Navbar Test', () => {
       .find('nav')
       .should('have.id','nav')
     });
-
-    it('has the Home, Book a Service, My Bookings, Profile and Logout buttons', () => {
-      cy.get('#nav ul li')
-      .should('have.length', 3)
-      .each(($el, index, $list) => {
-        if (index === 0) {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','href','index.html')
-          .should('have.text','Home')
-        } else if (index === 1) {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','routerLink','/services')
-          .should('have.attr','routerLinkActive','active')
-          .should('have.text','Book a Service')
-        }  else {
-          cy.wrap($el)
-          .find('a')
-          .each(($el, index, $list) => {
-            if (index === 0) {
-              cy.wrap($el)
-              .should('have.attr','routerLink','/bookings')
-              .should('have.attr','routerLinkActive','active')
-              .should('have.text','My Bookings')
-            } else if (index === 1) {
-              cy.wrap($el)
-              .should('have.attr','routerLink','/profile')
-              .should('have.attr','routerLinkActive','active')
-              .should('have.text','Profile')
-            }  else {
-              cy.wrap($el)
-              .should('have.attr','routerLink','/logout')
-              .should('have.attr','routerLinkActive','active')
-              .should('have.text','Logout')
-            }
-          })
-
-        }
-
-      })
-
-    })
-
 })

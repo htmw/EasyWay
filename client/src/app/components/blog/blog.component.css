@@ -1,25 +1,118 @@
-#box1 {
-  margin-top: 10px;
-  height: 300px;
-
-  width: 450px;
-  border: 2px solid black;
-}
-#box2 {
-  margin-top: 30px;
-  height: 300px;
-
-  width: 450px;
-  border: 2px solid black;
-}
-img {
-  max-width: 100%;
-  max-height: 100%;
+.blog-section {
+  background-color: #f8f9fa;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  text-align: left;
+.blog-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
-p {
-  text-align: left;
+
+.blog-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  animation: slideInDown 1s ease-out;
+}
+
+.blog-header p {
+  font-size: 18px;
+  color: #6c757d;
+  margin-bottom: 0;
+  animation: fadeIn 1s ease-out;
+}
+
+.blog-post {
+  margin-bottom: 60px;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  position: relative;
+}
+
+.blog-post:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+}
+
+.blog-post h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 16px;
+}
+
+.blog-post p {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 16px;
+}
+
+.blog-post a {
+  display: inline-block;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #343a40;
+  border: 2px solid #343a40;
+  padding: 8px 24px;
+  border-radius: 30px;
+  transition: all 0.3s ease-out;
+}
+
+.blog-post a:hover {
+  background-color: #343a40;
+  color: #fff;
+}
+
+/* Animation */
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInDown {
+from { transform: translateY(-100%); }
+to { transform: translateY(0); }
+}
+
+.read-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.read-more .btn {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+}
+
+.read-more .btn:hover,
+.read-more .btn:focus {
+  background-color: #0062cc;
+  border-color: #005cbf;
+  outline: none;
+}
+
+.read-more .btn:active {
+  background-color: #0062cc;
+  border-color: #005cbf;
+  transform: translateY(0.1rem);
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
 }

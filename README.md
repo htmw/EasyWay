@@ -1,6 +1,6 @@
 # EasyWay
 
-[View Project Description as PDF](https://github.com/ksharma67/EasyWay/blob/main/ProjectDocs/Artifacts/Product%20Description.pdf) | <a id="raw-url" href="https://github.com/ksharma67/EasyWay/blob/main/ProjectDocs/Artifacts/Product%20Description.docx">Download Project Description as Word Document</a>
+[View Project Description as PDF](https://github.com/htmw/EasyWay/blob/main/ProjectDocs/Artifacts/Project%20Description/Project%20Description.pdf) | <a id="raw-url" href="https://github.com/htmw/EasyWay/blob/main/ProjectDocs/Artifacts/Project%20Description/Project%20Description.docx">Download Project Description as Word Document</a>
 
 ### Project Overview
 
@@ -28,7 +28,7 @@ The EasyWay web application is built using a client-server architecture, with th
 
 The front-end of the EasyWay web application is designed using Angular JS, a popular framework for building single-page applications. The front-end design includes the following components:
 
-![Node.js Automated Testing](https://github.com/ksharma67/EasyWay/actions/workflows/node.js.yml/badge.svg) - [Front-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/node.js.yml)
+![Node.js Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/node.js.yml/badge.svg) - [Front-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/node.js.yml)
 
 * **User Interface:** The user interface is designed to be intuitive and user-friendly, with clear and concise layouts and color schemes.
 * **Navigation:** The navigation system is designed to provide easy access to all the features of the application, with clearly labeled menus and icons.
@@ -39,11 +39,36 @@ Interactive Elements: The interactive elements, such as buttons and links, are d
 
 The back-end of the EasyWay web application is designed using Node JS, a popular framework for building scalable and performant applications. The back-end design includes the following components:
 
-![Go Automated Testing](https://github.com/ksharma67/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/go.yml)
+![Go Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml)
 
 * **RESTful API:** The back-end provides a RESTful API for the front-end to communicate with the server.
 * **Database Access:** The back-end interacts with the MySQL database system to store and retrieve data.
 * **Server:** The server component of the back-end is implemented in GOLang, a high-performance programming language designed for building scalable and efficient applications.
+
+### Object Detection using Deep Learning
+
+One of the key features of the EasyWay web application is its ability to detect objects in images submitted by users. This is accomplished using a state-of-the-art deep learning algorithm for object detection.
+
+#### How Object Detection using Deep Learning Works
+
+Object detection using deep learning is typically accomplished using a convolutional neural network (CNN) that is trained on a large dataset of labeled images. During training, the network learns to identify features that are useful for object detection, such as edges, corners, and other distinctive patterns.
+
+Once the network is trained, it can be used to detect objects in new images by scanning the image and predicting bounding boxes and class probabilities for each object detected. This process can be made more efficient by using techniques such as anchor boxes, which are pre-defined boxes of various shapes and sizes that the algorithm uses to predict object locations.
+
+#### Implementation in EasyWay
+
+In EasyWay, object detection using deep learning is used to detect objects in images submitted by users, such as images of damaged equipment or pests. The algorithm is implemented using a neural network framework that is optimized for GPU computing.
+
+The model used in EasyWay is trained on a custom dataset of images relevant to the utility services provided by the application, including images of equipment, pests, and other relevant objects. The model is fine-tuned using transfer learning on a large-scale dataset of common objects in natural scenes.
+
+#### Benefits of Object Detection using Deep Learning
+
+Object detection using deep learning offers several benefits for the EasyWay web application, including:
+
+* **Real-time performance:** The algorithm is designed for real-time object detection, making it well-suited for the real-time nature of the EasyWay application.
+* **High accuracy:** Object detection using deep learning is one of the most accurate object detection algorithms available, with state-of-the-art performance on common object detection benchmarks.
+* **Easy to use:** The algorithm is easy to use and integrate into the EasyWay application, thanks to its well-documented implementation in the neural network framework.
+* **Customizability:** The algorithm can be easily fine-tuned on custom datasets to improve its accuracy on specific types of objects.
 
 ### Deployment
 
@@ -70,6 +95,10 @@ Our application is structured as follows:
 * Database : MySQL (GORM Library)
 * Version Control: Git
 * Code Editor : Visual Studio Code
+
+## Project Board:
+
+Link : https://github.com/users/ksharma67/projects/2
 
 ## API Documentation:
 

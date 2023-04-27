@@ -2,18 +2,13 @@ package app
 
 import (
 	"fmt"
-	"log"
 	"net/http"
-	"encoding/json"
+	"log"
+
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"github.com/ksharma67/EasyWay/server/app/handler"
-	"github.com/ksharma67/EasyWay/server/app/handlers"
-	"github.com/ksharma67/EasyWay/server/app/model"
 	"github.com/ksharma67/EasyWay/server/config"
-	"gopkg.in/gomail.v2"
-	"io/ioutil"
-	//"gorm.io/driver/sqlite"
 )
 
 // App has router and db instances
@@ -51,8 +46,13 @@ func (a *App) setRouters() {
 	a.Get("/getCancelledBookings", a.GetCancelledBookings)
 	a.Get("/getServiceInfo", a.GetServiceInfo)
 	a.Get("/getUserDetails", a.GetUserDetails)
-	a.Get("/searchServices", a.SearchServices)
+	a.Get("/getAllBlogs", a.GetAllBlogs)
+	a.Get("/getAllComments", a.GetAllComments)
+	a.Get("/searchServiceByName", a.SearchServiceByName)
+	a.Post("/forgotUsername", a.ForgotUsername)
 	a.Post("/forgotPassword", a.ForgotPassword)
+	a.Post("/createUploadedFile", a.CreateUploadedFile)
+	a.Post("/addComment", a.AddComment)
 }
 
 // Wrap the router for GET method
@@ -80,10 +80,12 @@ func (a *App) GetAllServices(w http.ResponseWriter, r *http.Request) {
 	handler.GetAllServices(a.DB, w, r)
 }
 
+// Handlers to Get Cancelled Bookings
 func (a *App) GetCancelledBookings(w http.ResponseWriter, r *http.Request) {
 	handler.GetCancelledBookings(a.DB, w, r)
 }
 
+// Handlers to Cancel Booking
 func (a *App) CancelBooking(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Called Routes: /cancelBooking Method:POST")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -92,11 +94,21 @@ func (a *App) CancelBooking(w http.ResponseWriter, r *http.Request) {
 	handler.CancelBooking(a.DB, w, r)
 }
 
+// Handlers to Create Services
 func (a *App) CreateService(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Called Routes: /cancelBooking Method:POST")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	handler.CreateService(a.DB, w, r)
 }
 
+// Handlers to Get Services In City
 func (a *App) GetServicesInCity(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Called Routes: /cancelBooking Method:POST")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	handler.GetServicesInCity(a.DB, w, r)
 }
 
@@ -111,6 +123,7 @@ func (a *App) CreateUser(w http.ResponseWriter, r *http.Request) {
 	handler.CreateUser(a.DB, w, r)
 }
 
+// Handlers to create Bookings
 func (a *App) CreateBooking(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Called Routes: /User Method:POST")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -120,6 +133,7 @@ func (a *App) CreateBooking(w http.ResponseWriter, r *http.Request) {
 	handler.CreateBooking(a.DB, w, r)
 }
 
+// Handlers to manage Login
 func (a *App) Login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
@@ -128,6 +142,7 @@ func (a *App) Login(w http.ResponseWriter, r *http.Request) {
 	handler.Login(a.DB, w, r)
 }
 
+// Handlers to get Bookings Data
 func (a *App) GetBookings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
@@ -135,6 +150,7 @@ func (a *App) GetBookings(w http.ResponseWriter, r *http.Request) {
 	handler.GetBookings(a.DB, w, r)
 }
 
+// Handlers to Get Services Data
 func (a *App) GetServiceInfo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
@@ -142,6 +158,7 @@ func (a *App) GetServiceInfo(w http.ResponseWriter, r *http.Request) {
 	handler.GetServiceInfo(a.DB, w, r)
 }
 
+// Handlers to Get User Data
 func (a *App) GetUserDetails(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
@@ -149,110 +166,67 @@ func (a *App) GetUserDetails(w http.ResponseWriter, r *http.Request) {
 	handler.GetUserDetails(a.DB, w, r)
 }
 
-// Search services by name
-func (a *App) SearchServices(w http.ResponseWriter, r *http.Request) {
-  query := r.URL.Query().Get("q")
-  if query == "" {
-    http.Error(w, "Missing query parameter", http.StatusBadRequest)
-    return
-  }
-
-  // Get a list of services that match the query
-  var services []model.Service
-  a.DB.Where("name LIKE ?", "%"+query+"%").Find(&services)
-
-  // Return the list of services as a JSON response
-  w.Header().Set("Content-Type", "application/json")
-  json.NewEncoder(w).Encode(services)
+// Handlers to Get Blogs Data
+func (a *App) GetAllBlogs(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+  handler.GetAllBlogs(a.DB, w, r)
 }
 
+// Handlers to Get Comments Data
+func (a *App) GetAllComments(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+  handler.GetAllComments(a.DB, w, r)
+}
+
+// SearchServices searches for services by name
+func (a *App) SearchServiceByName(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	handler.SearchServiceByName(a.DB, w, r)
+}
+
+//ForgotUsername
+func (a *App) ForgotUsername(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	handler.ForgotUsername(a.DB, w, r)
+}
+
+// Handler to initiate password reset process
+func (a *App) ForgotPassword(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	handler.ForgotPassword(a.DB, w, r)
+}
+
+//Upload
+func (a *App) CreateUploadedFile(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+  handler.CreateUploadedFile(a.DB, w, r)
+}
+
+//AddComment
+func (a *App) AddComment(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+  handler.AddComment(a.DB, w, r)
+}
 
 // Run the app on it's router
 func (a *App) Run(host string) {
 	log.Fatal(http.ListenAndServe(host, a.Router))
-}
-
-// ForgotPasswordHandler
-func (a *App) ForgotPassword(w http.ResponseWriter, r *http.Request) {
-	http.HandleFunc("/forgotpassword", handlers.ForgotPasswordHandler)
-
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal("Error starting HTTP server: ", err)
-	}
-}
-
-// Handler function for the "forgot username" form submission
-func (a *App) ForgotUsername(w http.ResponseWriter, r *http.Request) {
-	// Parse the email or phone number from the form data
-	r.ParseForm()
-	email := r.Form.Get("email")
-
-	// Validate the input
-	if email == "" {
-		// Input is invalid
-		http.Error(w, "Please enter your email", http.StatusBadRequest)
-		return
-	}
-
-	// Query the database for the user(s) with the given email
-	var users []model.User
-	if email != "" {
-		a.DB.Where("email = ?", email).Find(&users)
-	}
-
-	// Check if any users were found
-	if len(users) == 0 {
-		// No user found with the given email
-		http.Error(w, "We couldn't find your account. Please check your email.", http.StatusNotFound)
-		return
-	}
-
-	// Send the username(s) to the user via email
-	for _, user := range users {
-		message := gomail.NewMessage()
-		message.SetHeader("From", "noreply@easyway.com")
-		message.SetHeader("To", email)
-		message.SetHeader("Subject", "Username request")
-		fmt.Printf("Username for %s: %s\n", user.Name, user.Username)
-
-		// Create a new dialer to connect to Mailtrap
-		dialer := gomail.NewDialer("sandbox.smtp.mailtrap.io", 2525, "b587fb03c51f13", "7f047af2a761af")
-
-		// Send the message
-		if err := dialer.DialAndSend(message); err != nil {
-			http.Error(w, "Error sending email", http.StatusInternalServerError)
-			return
-		}
-	}
-
-	// Inform the user that their username(s) have been sent
-	fmt.Fprint(w, "Your username(s) have been sent to your email.")
-}
-
-func handleUpload(w http.ResponseWriter, r *http.Request) {
-    err := r.ParseMultipartForm(32 << 20) // 32MB max request size
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusBadRequest)
-        return
-    }
-
-    file, header, err := r.FormFile("file")
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusBadRequest)
-        return
-    }
-    defer file.Close()
-
-    // Read the file data
-    fileBytes, err := ioutil.ReadAll(file)
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
-
-    // Send the file data as a response
-    w.Header().Set("Content-Disposition", "attachment; filename="+header.Filename)
-    w.Header().Set("Content-Type", r.Header.Get("Content-Type"))
-    w.Write(fileBytes)
 }

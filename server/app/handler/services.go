@@ -88,3 +88,22 @@ func CreateService(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	respondJSON(w, http.StatusCreated, services)
 }
+
+// SearchServiceByName searches for services that match the given name
+func SearchServiceByName(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("name")
+
+	if len(query) >= 3 {
+		var services []model.Service
+		db.Where("name LIKE ?", "%"+query+"%").Find(&services)
+
+		if len(services) > 0 {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(services)
+			return
+		}
+	}
+
+	w.WriteHeader(http.StatusNotFound)
+}

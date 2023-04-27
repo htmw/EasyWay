@@ -1,74 +1,76 @@
+/* Set default font family and background color */
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f8fafb;
 }
 
+/* Set default styling for paragraphs */
 p {
   color: #b3b3b3;
   font-weight: 300;
-  font-size: x-large;
+  font-size: 18px;
 }
 
+/* Styling for paragraphs within forms */
 form p {
   color: #b3b3b3;
   font-weight: 300;
-  font-size: large;
+  font-size: 16px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
+/* Set default font family for headings */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Roboto", sans-serif;
 }
 
+/* Set animation for links */
 a {
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
-  transition: .3s all ease;
+  transition: all 0.3s ease;
 }
 
+/* Remove underline on hover */
 a:hover {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
+/* Add padding to content section */
 .content {
   padding: 7rem 0;
 }
 
+/* Style for H2 elements */
 h2 {
-  font-size: 20px;
+  font-size: 24px;
 }
 
+/* Adjust background height for smaller screens */
 @media (max-width: 991.98px) {
   .content .bg {
     height: 500px;
   }
 }
 
-.content .contents,
-.content .bg {
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Set width for content and background sections */
+.content .contents, .content .bg {
   width: 50%;
 }
 
+/* Adjust width for smaller screens */
 @media (max-width: 1199.98px) {
-
-  .content .contents,
-  .content .bg {
+  .content .contents, .content .bg {
     width: 100%;
   }
 }
 
-.content .contents .form-group,
-.content .bg .form-group {
+/* Styling for form groups */
+.content .contents .form-group, .content .bg .form-group {
   overflow: hidden;
   margin-bottom: 0;
   padding: 15px 15px;
@@ -76,20 +78,16 @@ h2 {
   position: relative;
 }
 
-.content .contents .form-group label,
-.content .bg .form-group label {
+/* Styling for form group labels */
+.content .contents .form-group label, .content .bg .form-group label {
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
-  transition: .3s all ease;
+  transition: all 0.3s ease;
 }
 
-.content .contents .form-group input,
-.content .bg .form-group input {
+/* Styling for form group inputs */
+.content .contents .form-group input, .content .bg .form-group input {
   background: transparent;
   width: 100%;
   border: none;
@@ -97,94 +95,88 @@ h2 {
   opacity: 0.6
 }
 
-.content .contents .form-group input,
-.content .bg .form-group input:focus {
+/* Remove outline on focus */
+.content .contents .form-group input:focus, .content .bg .form-group input:focus {
   outline: none;
 }
 
+/* Center align input fields */
 .center-align {
   text-align: center;
 }
 
+/* Style for input fields within center-aligned form groups */
 .center-align input {
   width: 64%;
   background-color: #1e2833;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
+/* Style for input fields on hover */
 .center-align input:hover {
   background-color: white;
-  border: 1px solid #1e2833;
   color: #1e2833;
+  border: 1px solid #1e2833;
 }
 
-.content .contents .form-group.first,
-.content .bg .form-group.first {
+/* Styling for first and last form groups */
+.content .contents .form-group.first, .content .bg .form-group.first {
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
 }
 
-.content .contents .form-group.last,
-.content .bg .form-group.last {
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
+.content .contents .form-group.last, .content .bg .form-group.last {
+  border: none;
 }
 
-.content .contents .form-group label,
-.content .bg .form-group label {
+/* Form styles */
+
+.form-group label {
   font-size: 12px;
   display: block;
   margin-bottom: 0;
   color: #b3b3b3;
 }
 
-.content .contents .form-group.focus,
-.content .bg .form-group.focus {
+.form-group.focus {
   background: #fff;
 }
 
-.content .contents .form-group.field--not-empty label,
-.content .bg .form-group.field--not-empty label {
+.form-group.field--not-empty label {
   margin-top: -20px;
 }
 
-.content .contents .form-control,
-.content .bg .form-control {
+.form-control {
   border: none;
   padding: 0;
   font-size: 20px;
   border-radius: 0;
 }
 
-.content .contents .form-control:active,
-.content .contents .form-control:focus,
-.content .bg .form-control:active,
-.content .bg .form-control:focus {
+.form-control:active,
+.form-control:focus {
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-.content .bg {
-  background-size: cover;
-  background-position: center;
-}
-
-.content a {
-  color: #888;
-  text-decoration: underline;
-}
-
-.content .btn {
+.btn {
   height: 54px;
   padding-left: 30px;
   padding-right: 30px;
 }
 
-.content .forgot-pass {
+.forgot-pass {
   position: relative;
   top: 2px;
   font-size: 14px;
 }
+
+/* Social login styles */
 
 .social-login a {
   text-decoration: none;
@@ -202,8 +194,6 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -234,6 +224,8 @@ h2 {
 .social-login a.google:hover {
   background: #e82e1e;
 }
+
+/* Checkbox and radio button styles */
 
 .control {
   display: block;
@@ -324,23 +316,91 @@ h2 {
   opacity: .2;
 }
 
+/* Button Styling */
 .btn-primary {
   border-color: #1e2833;
+  background-color: #6c63ff;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #847dff;
+  border-color: #847dff;
 }
 
 .booking-container {
-  padding-top: 2em;
+  padding: 2em 1em;
+  background-color: #ffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .booking-img {
-  max-width: 90%;
-  margin-left: 6em;
+  max-width: 100%;
+  margin: 1em 0;
+  border-radius: 10px;
+  animation: zoomIn 0.5s ease-out;
 }
 
 .booking-service-name {
+  font-size: 1.5em;
+  font-weight: bold;
   color: #1e2833;
+  margin-top: 1em;
+  text-align: center;
+  animation: slideInFromTop 0.5s ease-out;
 }
+
 .booking-service-price {
+  font-size: 1.2em;
   color: #1e2833;
-  margin-top: -1em;
+  margin-top: 0.5em;
+  text-align: center;
+  animation: slideInFromBottom 0.5s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

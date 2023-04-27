@@ -6,16 +6,13 @@
 
 /* Banner */
 #banner {
-  background-attachment: scroll, fixed;
-  background-color: #666;
-  background-image: url("../../../assets/images/banner.jpg");
-  background-position: top left, center center;
-  background-repeat: repeat, no-repeat;
-  background-size: auto, cover;
+  background: #666 url("../../../assets/images/banner.jpg") center center / cover no-repeat fixed;
   color: #fff;
-  padding: 12em 0 20em 0;
   text-align: center;
-  font-family: 'Source Sans Pro', sans-serif;
+  padding: 12em 0 20em 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 1em;
 }
 
 #banner :last-child {
@@ -33,13 +30,27 @@
 #banner h2 {
   font-size: 3.5em;
   line-height: 1em;
-  margin: 0 0 0.5em 0;
-  padding: 0;
+  margin: 0;
 }
 
 #banner p {
   font-size: 1.25em;
   margin-bottom: 1.75em;
+}
+
+#banner-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#banner-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
 
 #banner input[type="submit"],
@@ -74,6 +85,38 @@
   color: #666 !important;
 }
 
+/* Animations */
+
+@keyframes slideInFromLeft {
+0% {
+transform: translateX(-100%);
+}
+100% {
+transform: translateX(0);
+}
+}
+
+.slide-in-from-left {
+animation: slideInFromLeft 0.5s ease-in-out;
+}
+
+@keyframes slideInFromRight {
+0% {
+transform: translateX(100%);
+}
+100% {
+transform: translateX(0);
+}
+}
+
+.slide-in-from-right {
+animation: slideInFromRight 0.5s ease-in-out;
+}
+
+/* FadeIn animation to the banner class */
+.banner {
+animation: fadeIn 1s ease-in-out;
+}
 
 /* List Styling */
 ol,
@@ -83,8 +126,8 @@ ul {
 
 ul {
   list-style: disc;
-  margin: 0 0 2em 0;
-  padding-left: 1em;
+  margin: 0 0 2rem 0;
+  padding-left: 1rem;
 }
 
 ul.actions {
@@ -92,7 +135,9 @@ ul.actions {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  cursor: default;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
   list-style: none;
   margin-left: -1em;
   padding-left: 0;
@@ -112,13 +157,18 @@ ul.actions.special li:first-child {
 }
 
 ul.actions li {
-  padding: 0 0 0 1em;
+  padding: 0 1rem;
   vertical-align: middle;
 }
 
 ul li {
-  padding-left: 0.5em;
+  margin-bottom: 0.5rem;
 }
+
+ul.actions li:hover {
+  transform: translateY(-2px);
+}
+
 
 input[type="submit"],
 input[type="reset"],
@@ -130,21 +180,41 @@ input[type="button"],
   appearance: none;
   -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  background-color: #666;
-  border-radius: 6px;
-  border: 0;
+  border-radius: 0.5rem;
+  border: none;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: bold;
   height: 3em;
-  line-height: 3em;
-  padding: 0 2em;
+  padding: 0.75rem 1.5rem;;
+  transition: all 0.3s ease-in-out;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+background-color: #555;
+transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.banner {
+  animation: fadeIn 1s ease-in-out;
 }
 
 

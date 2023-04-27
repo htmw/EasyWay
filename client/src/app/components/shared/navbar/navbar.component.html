@@ -2,13 +2,18 @@
   <h3><a routerLink="/home">EasyWay</a></h3>
   <nav id="nav">
     <ul>
-       <i class="fa fa-search"></i>
-      <li>
-        <form action="" method="get">
-          <input type="text" placeholder="Search Services" id="search-input" (keyup)="searchServices($event)" />
+      <i class="fa fa-search search-icon"></i>
+      <li class="dropdown">
+        <form action="/search" method="get">
+          <div class="search-container">
+            <input type="text" placeholder="Search for services..." (input)="searchServices($event)" />
+            <datalist id="search-results" *ngIf="showDropdown">
+              <option *ngFor="let item of searchResults" [value]="item.name" (click)="selectService(item)"></option>
+            </datalist>
+          </div>
         </form>
       </li>
-      <li style="white-space: nowrap;"><a href="index.html">Home</a></li>
+      <li style="white-space: nowrap;"><a href="/home">Home</a></li>
       <li style="white-space: nowrap;">
         <i class="fa fa-camera" aria-hidden="true" routerLink="/upload"></i>
         <a routerLink="/services" routerLinkActive="active">Book a Service</a>

@@ -1,3 +1,4 @@
+-- Creating a table named ucc_users with columns uid, name, username, password, email, gender
 create table ucc_users (
 	uid INT PRIMARY KEY
 	name VARCHAR(70) NOT NULL,
@@ -7,6 +8,8 @@ create table ucc_users (
 	gender VARCHAR(1) NOT NULL,
 	CHECK (gender in ('M', 'F'))
 );
-insert into ucc_users (name, email, gender, username, password) values (0, 'Dummy Duck', 'dummy', 'dumdum', 'dummy@ufl.edu', 'M');
-insert into ucc_users (name, email, gender, username, password) values (1, 'Buzz Lightyear', 'buzz', 'busybee', 'buzz@ufl.edu', 'M');
-insert into ucc_users (name, email, gender, username, password) values (2, 'Snow White', 'snow', 'abc1234', 'snow@ufl.edu', 'F');
+
+-- Inserting values into ucc_users table
+insert into ucc_users (name, email, gender, username, password) values (0, 'Dummy Duck', 'dummy', 'dumdum', 'dummy@pace.edu', 'M');
+insert into ucc_users (name, email, gender, username, password) values (1, 'Buzz Lightyear', 'buzz', 'busybee', 'buzz@pace.edu', 'M');
+insert into ucc_users (name, email, gender, username, password) values (2, 'Snow White', 'snow', 'abc1234', 'snow@pace.edu', 'F');

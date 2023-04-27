@@ -13,7 +13,7 @@ export class ServicesComponent implements OnInit {
 
   servicesData = [];
   imageURL = GlobalConstants.imageURL;
-  
+
   constructor(private http: HttpClient, private router: Router) { }
 
   bookService(service: any) {
@@ -34,7 +34,3 @@ export class ServicesComponent implements OnInit {
   }
 
 }
-
-
-
-

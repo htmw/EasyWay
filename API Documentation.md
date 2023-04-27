@@ -6,7 +6,7 @@ Requests can be made with http.
 
 ## 1. getServices
 
-This API endpoint retrieves the list of services that the end-user can avail. 
+This API endpoint retrieves the list of services that the end-user can avail.
 
 *Request type:* **GET**  
 *Output type:* **JSON Array**  
@@ -49,8 +49,8 @@ This API endpoint retrieves the list of services that the end-user can avail.
 | name          | String  | Name of the service.                           |
 | description   | String  | Description of the service.                    |
 | category      | String  | Category of the service.                       |  
-  
-  
+
+
 ## 2. createService
 
 This API endpoint creates a new service as specified by the end-user. This is a POST request.
@@ -79,11 +79,11 @@ This is sent with the default "Content-Type" header of "application/x-www-form-u
 &emsp;    "image_name": "default.jpg",  
 &emsp;    "price": 15  
 }  
-  
-  
+
+
 ## 3. register
 
-This API endpoint registers a new user. 
+This API endpoint registers a new user.
 This is sent with the default "Content-Type" header of "application/x-www-form-urlencoded"
 
 *Request type:* **POST**  
@@ -95,7 +95,7 @@ This is sent with the default "Content-Type" header of "application/x-www-form-u
 *Sample input:*  
 {  
 &emsp;    "name": "alex",  
-&emsp;    "email": "alex@ufl.edu",  
+&emsp;    "email": "alex@pace.edu",  
 &emsp;    "gender": "F",  
 &emsp;    "username": "alex",  
 &emsp;    "password": "alex1"  
@@ -107,7 +107,7 @@ This is sent with the default "Content-Type" header of "application/x-www-form-u
 &emsp;    "name": "alex",  
 &emsp;    "username": "alex",  
 &emsp;    "password": "alex1",  
-&emsp;    "email": "alex@ufl.edu",  
+&emsp;    "email": "alex@pace.edu",  
 &emsp;    "gender": "F"  
 }  
 
@@ -120,12 +120,12 @@ This is sent with the default "Content-Type" header of "application/x-www-form-u
 | username      | String  | Username of the user.                                                      |
 | email         | String  | Email ID of the user. Must be of the form <br> 'xxxxx@xxxxxx'              |
 | gender        | String  | Gender of the user. Can be either 'M' or 'F'.                              |
-| password      | String  | Password for the user. Has to be between 7 to <br> 14 characters in length and must contain <br> atleast one lower case character, one upper <br> case character and one number.                        | 
+| password      | String  | Password for the user. Has to be between 7 to <br> 14 characters in length and must contain <br> atleast one lower case character, one upper <br> case character and one number.                        |
 
 
 ## 4. login
 
-This API endpoint logs in a new user. This request is sent with the default 
+This API endpoint logs in a new user. This request is sent with the default
 "Content-Type" header of "application/x-www-form-urlencoded". If the user credentials match with that in the
 database, it returns the user details in JSON format else it returns a *404 Not Found* error.
 
@@ -147,7 +147,7 @@ database, it returns the user details in JSON format else it returns a *404 Not 
 &emsp;    "name": "Dummy Duck",  
 &emsp;    "username": "dummy",  
 &emsp;    "password": "dumdum",  
-&emsp;    "email": "dummy@ufl.edu",  
+&emsp;    "email": "dummy@pace.edu",  
 &emsp;    "gender": "M"  
 }  
 
@@ -195,7 +195,7 @@ Returns a *404 Not Found* error if there are no bookings or if the *userId* is i
 | date          | String  | Date on which the booking was made by the user. Format: "YYYY-MM-DD". |
 | start_time    | String  | Time at which the service booking commences. Format: "HH:MM".         |
 | end_time      | String  | Time at which the service booking ends Format: "HH:MM".               |
-| is_cancelled  | Boolean | Cancellation status of the booking. Can be true or false.             | 
+| is_cancelled  | Boolean | Cancellation status of the booking. Can be true or false.             |
 
 
 ## 6. bookService
@@ -232,10 +232,10 @@ This request is sent with the default "Content-Type" header of "application/x-ww
 ## 7. cancelBooking
 
 This API endpoint cancels a particular booking for a service by the end-user.
-This request is sent with the default "Content-Type" header of "application/x-www-form-urlencoded". The request either 
-sets the *is_cancelled* field of the booking to *true* and returns a *200 OK* status along with the message 
+This request is sent with the default "Content-Type" header of "application/x-www-form-urlencoded". The request either
+sets the *is_cancelled* field of the booking to *true* and returns a *200 OK* status along with the message
 *Booking is cancelled* or if the booking has already been cancelled it returns a *Booking already cancelled*
-message. 
+message.
 
 *Request type:* **GET**  
 *Output type:* **String**  

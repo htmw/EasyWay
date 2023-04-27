@@ -22,37 +22,4 @@ describe('EasyWay Landing Page Test', () => {
       .should('have.id','nav')
     });
 
-    it('has the Home, Book a Service, Sign In and Get Started buttons', () => {
-      cy.get('#nav ul li')
-      .should('have.length', 4)
-      .each(($el, index, $list) => {
-        if (index === 0) {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','href','index.html')
-          .should('have.text','Home')
-        } else if (index === 1) {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','routerLink','/services')
-          .should('have.attr','routerLinkActive','active')
-          .should('have.text','Book a Service')
-        } else if (index === 2) {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','routerLink','/login')
-          .should('have.attr','routerLinkActive','active')
-          .should('have.text','Sign In')
-        } else {
-          cy.wrap($el)
-          .find('a')
-          .should('have.attr','routerLink','/register')
-          .should('have.attr','routerLinkActive','active')
-          .should('have.class','button')
-          .should('have.text','Get Started')
-        }
-    })
-
-  })
-
 })

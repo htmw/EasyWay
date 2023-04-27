@@ -1,18 +1,29 @@
 /* Header */
 
-input[type="text"] {
-  margin-top: 15px;
-  border: 1px solid #ccc;
-  padding: 0px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  width: 500px;
-  height: 40px;
-  background-color: #ccc;
-  margin-left: 10px;
+#header input[type="text"] {
+  padding-left: 40px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  box-sizing: border-box;
+  outline: none;
+  color: #777;
 }
-a {
-  text-decoration: none;
+
+#header input[type="text"]:focus {
+  outline: none;
+}
+
+#header input[type="text"]::placeholder {
+  color: #777;
+}
+
+#header .icon-search {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 #page-wrapper {
@@ -88,10 +99,13 @@ body.landing #page-wrapper {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+#header h3 a:hover {
+  opacity: 0.8;
+}
+
 #header h3 a {
   color: #fff;
   font-weight: 400;
-  border: 0;
 }
 
 #header nav {
@@ -164,8 +178,11 @@ body.landing #page-wrapper {
 #header input[type="reset"]:hover,
 #header input[type="button"]:hover,
 #header .button:hover {
-  background-color: rgba(153, 153, 153, 0.25);
+  background-color: #999;
+  color: #fff;
+  cursor: pointer;
 }
+
 
 #header input[type="submit"]:active,
 #header input[type="reset"]:active,
@@ -251,4 +268,62 @@ body.landing #page-wrapper {
 #header.alt input[type="button"]:active,
 #header.alt .button:active {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+#header input[type="text"].closed {
+  background-image: none;
+}
+
+/* Styles the search box */
+#nav form {
+  position: relative; /* Set position to relative for the search box */
+}
+
+#nav form input[type="text"] {
+  background: transparent; /* Set background to transparent */
+  border: none; /* Remove border */
+  border-bottom: 2px solid white; /* Add bottom border */
+  color: white; /* Set text color to white */
+  font-size: 1.2em; /* Set font size */
+  padding: 0.5em; /* Add padding */
+  width: 0; /* Set initial width to 0 */
+  transition: width 0.5s; /* Add transition effect */
+}
+
+#nav form input[type="text"]:focus {
+  outline: none; /* Remove outline on focus */
+  width: 200px; /* Set width to 200px on focus */
+}
+
+#nav form i {
+  color: white; /* Set icon color to white */
+  position: absolute; /* Set position to absolute */
+  top: 0.5em; /* Add top spacing */
+  right: 2em; /* Add right spacing */
+  z-index: 2; /* Set z-index to be on top of input */
+}
+
+/* Fixes overlap issue */
+#nav ul li:nth-child(2) {
+  position: relative; /* Set position to relative */
+}
+
+#nav ul li:nth-child(2) ul {
+  position: absolute; /* Set position to absolute */
+  top: 100%; /* Position below parent */
+  left: 0; /* Align with parent */
+  z-index: 1; /* Set z-index below parent */
+  background: #1e2833; /* Set background color */
+  padding: 0.5em; /* Add padding */
+  width: 100%; /* Set width to 100% */
+  display: none; /* Hide by default */
+}
+
+#nav ul li:nth-child(2):hover ul {
+  display: block; /* Show on hover */
+}
+
+.dropdown-item.active {
+  background-color: #007bff;
+  color: #fff;
 }

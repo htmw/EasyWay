@@ -1,54 +1,59 @@
+/* The following code styles a container and adds custom styling to a button element */
+
 .container {
-    margin-top: 5em;
-    text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
+margin-top: 5em; /* Adds top margin to container */
+text-align: center; /* Centers content within container */
+font-family: 'Source Sans Pro', sans-serif; /* Sets font family for text */
 }
 
 ul.actions.special {
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
-    width: 100%;
-    margin-left: 0;
-    list-style: none;
+-moz-justify-content: center; /* For Firefox browsers: horizontally centers list items */
+-webkit-justify-content: center; /* For Safari and Chrome browsers: horizontally centers list items */
+-ms-justify-content: center; /* For Microsoft Edge browsers: horizontally centers list items */
+justify-content: center; /* Horizontally centers list items */
+width: 100%; /* Sets width of list to 100% of its parent container */
+margin-left: 0; /* Removes left margin from list */
+list-style: none; /* Removes bullet points from list items */
 }
 
 ul.actions.special li:first-child {
-    padding-left: 0;
+padding-left: 0; /* Removes left padding from first list item */
 }
 
-/* Custom */
+/* Custom styling */
 
 .center-align {
-    text-align: center;
+text-align: center; /* Centers content within the element */
 }
 
 .book-btn {
-    margin-top: 6em;
-    margin-bottom: -1em;
+margin-top: 6em; /* Adds top margin to the element */
+margin-bottom: -1em; /* Adds negative bottom margin to adjust element position */
 }
 
 .center-align button {
-    /* width: 64%; */
-    background-color: #1e2833;
-    padding: 12px 20px;
-    border-radius: 6px;
-    border-color: #1e2833;
+/* width: 64%; */ /* Commented out code, width not specified */
+background-color: #1e2833; /* Sets background color of button */
+padding: 12px 20px; /* Sets padding of button */
+border-radius: 6px; /* Sets border radius of button */
+border-color: #1e2833; /* Sets border color of button */
 }
 
 .center-align button a {
-    text-decoration: none;
-    font-family: 'Source Sans Pro', sans-serif;
-    color: white;
-    font-size: large;
+text-decoration: none; /* Removes underline from link */
+font-family: 'Source Sans Pro', sans-serif; /* Sets font family of text */
+color: white; /* Sets text color of link */
+font-size: large; /* Sets font size of text */
 }
 
 .center-align button:hover {
-    background-color: white;
-    border: 1px solid #1e2833;
-    color: #1e2833;
+background-color: white; /* Sets background color of button on hover */
+border: 1px solid #1e2833; /* Sets border style of button on hover */
+color: #1e2833; /* Sets text color of button on hover */
 }
+
 .center-align button a:hover {
-    color: #1e2833;
+color: #1e2833; /* Sets text color of link on hover */
 }
+
+/* Output: There will be no output as this is a CSS code block. The code styles a container and button element using CSS. */

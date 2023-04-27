@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalConstants } from 'src/app/common/global-constants';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -11,8 +12,10 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn:boolean = false;
   currentRoute:string = '';
+  searchResults: any[] = [];
+  showDropdown: boolean = false;
 
-  constructor(private http: HttpClient,public router:Router) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('isLoggedIn') == 'true') {
@@ -28,13 +31,36 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
   searchServices(event: Event) {
     const query = (event.target as HTMLInputElement)?.value;
-    if (query && query.length >= 3) { // only search if the query is at least 3 characters long
-      this.http.get('/api/searchServices?q=' + query).subscribe((data: any) => {
-        // display the search results in the console for now
+    if (query && query.length >= 3) {
+      const searchUrl = `http://localhost:3000/api/searchServiceByName?name=${query}`;
+      this.http.get(searchUrl).subscribe((data: any) => {
         console.log(data);
+        const datalist = document.getElementById('search-results');
+        if (datalist) {
+          datalist.innerHTML = '';
+          data.forEach((item: any) => {
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.setAttribute('data-id', item.id);
+            datalist.appendChild(option);
+          });
+        }
+        if (data.length > 0) {
+          this.showDropdown = true;
+        } else {
+          this.showDropdown = false;
+        }
       });
+    } else {
+      this.showDropdown = false;
     }
+  }
+  selectService(item: any) {
+    this.showDropdown = false;
+    console.log('Selected service:', item);
+    // Do something with the selected service
   }
 }

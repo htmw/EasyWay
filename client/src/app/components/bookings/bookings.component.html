@@ -1,3 +1,4 @@
+<!-- Header section -->
 <header class="bg-dark py-5 service-header">
     <div class="container px-lg-5 my-5">
         <div class="text-center text-white">
@@ -5,15 +6,17 @@
         </div>
     </div>
 </header>
-
+<!-- Active bookings section -->
 <section>
     <div class="container">
         <h3>Active Bookings</h3>
         <div class="booking-toggle">
+          <!--
             <button><a href="#">ONGOING</a></button>
             <button><a href="#">HISTORY</a></button>
+            -->
         </div>
-
+        <!-- Active bookings section -->
         <section class="" id="active-main">
             <div class="row">
                 <div class="col-6 col-12-narrower" *ngFor="let serviceB of myBookingsData; let i = index">
@@ -29,7 +32,7 @@
                 </div>
             </div>
         </section>
-
+        <!-- Cancelled bookings section -->
         <h3>Cancelled bookings</h3>
 
         <section class="" id="cancel-main">
@@ -43,9 +46,11 @@
                 </div>
             </div>
         </section>
-
+        <!-- Button to book a new service -->
         <div class="center-align book-btn">
             <button><a href="/services">Book a Service</a></button>
         </div>
     </div>
 </section>
+<!-- Output -->
+<!-- This code defines the layout for a "My Bookings" page, including a header, two sections to display active and cancelled bookings, and a button to book a new service. -->

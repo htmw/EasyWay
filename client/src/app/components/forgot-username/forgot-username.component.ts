@@ -29,13 +29,13 @@ export class ForgotUsernameComponent implements OnInit {
 
     const email = this.forgotUsernameForm.value.email1;
 
-    this.http.post('/api/forgot-username', { email }).subscribe(
+    this.http.post(GlobalConstants.apiURL + 'forgotUsername', { email }).subscribe(
       (response) => {
-        // console.log('Username sent on email.');
+        console.log('Username sent on email.');
         alert('Username sent on email.')
       },
       (error) => {
-        // console.log('Invalid email!', error);
+        console.log('Invalid email!', error);
         alert('Invalid email!')
       }
     );

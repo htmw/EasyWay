@@ -1,3 +1,4 @@
+-- Create a table called ucc_services
 create table ucc_services (
 	name TEXT NOT NULL,
 	description VARCHAR(200),
@@ -6,6 +7,8 @@ create table ucc_services (
 	image_name VARCHAR(80) DEFAULT 'default.jpg',
 	CHECK (gender in ('M', 'F', null))
 );
+
+-- Insert some sample data into the ucc_services table
 insert into ucc_services (name, description, category, image_name) values ('AC Maintanance', 'Excision of Right External Jugular Vein, Open Approach', 'Household','air_conditioning.jpg');
 insert into ucc_services (name, description, category, image_name) values ('Plumbing', 'Revise of Synth Sub in Sacrococcygeal Jt, Perc Endo Approach', 'Household','plumbing.jpg');
 insert into ucc_services (name, description, category, image_name) values ('Haircut', 'Removal of Infusion Device from Lum Disc, Open Approach', 'Personal Care','saloon.jpg');

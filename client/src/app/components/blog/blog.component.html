@@ -1,55 +1,60 @@
-<header class="bg-dark py-5 service-header">
-    <div class="container px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Blog</h1>
-          <div id="box1">
-            <span class="image featured"><img src="../../../assets/images/house_cleaning.jpg.jpg" alt=""></span>
-      </div>
-      <h1>Home Cleaning Hacks!</h1>
-      <p>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of
-        letters, as opposed to using 'Content here, content here', making it
-        look like readable English. Many desktop publishing packages and web
-        page editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like). It is a
-        long established fact that a reader will be distracted by the readable
-        content of a page when looking at its layout. The point of using Lorem
-        Ipsum is that it has a more-or-less normal distribution of letters, as
-        opposed to using 'Content here, content here', making it look like
-        readable English. Many desktop publishing packages and web page editors
-        now use Lorem Ipsum as their default model text, and a search for 'lorem
-        ipsum' will uncover many web sites still in their infancy. Various
-        versions have evolved over the years, sometimes by accident, sometimes
-        on purpose (injected humour and the like).
-      </p>
-      <div id="box2">
-        <span class="image featured"><img src="../../../assets/images/refridgerator .jpg.jpg" alt=""></span>
-      </div>
-      <h1>Refrigerator Cleaning Hacks!</h1>
-      <p>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of
-        letters, as opposed to using 'Content here, content here', making it
-        look like readable English. Many desktop publishing packages and web
-        page editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like). It is a
-        long established fact that a reader will be distracted by the readable
-        content of a page when looking at its layout. The point of using Lorem
-        Ipsum is that it has a more-or-less normal distribution of letters, as
-        opposed to using 'Content here, content here', making it look like
-        readable English. Many desktop publishing packages and web page editors
-        now use Lorem Ipsum as their default model text, and a search for 'lorem
-        ipsum' will uncover many web sites still in their infancy. Various
-        versions have evolved over the years, sometimes by accident, sometimes
-        on purpose (injected humour and the like).
-      </p>
-        </div>
-    </div>
+<!-- Header section -->
+<header class="bg-dark py-5 service-header blog-header">
+  <div class="container px-lg-5 my-5">
+    <h1 class="display-4 text-center text-white fw-bold">Blog</h1>
+  </div>
 </header>
+
+<!-- Blog section -->
+<section class="py-5 blog-post">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <ul class="list-unstyled">
+          <!-- Loop through each post and display its details -->
+          <li class="media mb-4" *ngFor="let post of posts">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="image featured"><img class="image-padding" [src]="imageURL + post.image_name" alt="" width="200"/></span>
+              </div>
+              <div class="col-md-8">
+                <div class="media-body">
+                  <!-- Link to the post details page -->
+                  <a routerLink="/blog/{{ post.id }}">
+                    <h3 class="mb-0">{{ post.title }}</h3>
+                  </a>
+                  <!-- Display the post creation date -->
+                  <small class="d-block text-muted mb-2">{{ post.created_at | date:'MMM d, y' }}</small>
+                  <!-- Display the post content -->
+                  <p class="mb-3">{{ post.content }}</p>
+                  <div class="read-more">
+                    <!-- Link to the post details page -->
+                    <a class="btn btn-primary" (click)="goToBlogDetails(post.id)">Load Comments</a>
+                  </div>
+                  <ul>
+                    <br>
+                    <!-- Loop through each comment of the post and display its details -->
+                    <li *ngFor="let comment of comments">
+                      <div>{{ comment.content }}</div>
+                      <!-- Display the comment creation date -->
+                      <small class="d-block text-muted mb-2">{{ comment.created_at | date:'MMM d, y' }}</small>
+                    </li>
+                    <br>
+                  </ul>
+                  <form (ngSubmit)="onSubmit(post.id)" #commentForm="ngForm">
+                    <div class="form-group">
+                      <label for="content">Add a comment</label>
+                      <textarea class="form-control" id="content" name="content" [(ngModel)]="newComment.content" required></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" [disabled]="!commentForm.valid">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

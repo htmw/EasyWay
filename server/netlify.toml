@@ -1,0 +1,6 @@
+[build]
+  command = "go build -o server"
+  publish = "dist"
+
+[dev]
+  command = "go run main.go"

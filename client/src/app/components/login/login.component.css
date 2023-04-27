@@ -1,7 +1,22 @@
 body {
+  background: linear-gradient(to bottom, #f8fafb 0%, #d2d8e4 100%);
   font-family: "Roboto", sans-serif;
-  background-color: #f8fafb;
 }
+
+/*keyframe animation to the background */
+body {
+animation: backgroundAnimation 20s ease infinite alternate;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 -1000px;
+    }
+}
+
 
 p {
   color: #b3b3b3;
@@ -15,13 +30,16 @@ h4,
 h5,
 h6,
 .h1,
-.h2,
+.h2
 .h3,
 .h4,
 .h5,
 .h6 {
   font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  color: #1e2833;
 }
+
 
 a {
   -webkit-transition: .3s all ease;
@@ -52,13 +70,73 @@ h2 {
   width: 50%;
 }
 
-@media (max-width: 1199.98px) {
+.content .contents {
+  animation: slide-up 0.8s ease;
+}
 
-  .content .contents,
-  .content .bg {
-    width: 100%;
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
   }
 }
+
+@media (max-width: 767.98px) {
+  .content .contents,
+  .content .bg {
+    width: 80%;
+  }
+  .center-align input {
+  width: 100%;
+ }
+}
+
+@media (max-width: 575.98px) {
+.content .contents,
+.content .bg {
+  width: 100%;
+  }
+.content .btn {
+  width: 100%;
+  }
+}
+
+@media (max-width: 375.98px) {
+.content .contents .form-group label,
+.content .bg .form-group label {
+  font-size: 11px;
+}
+.content .contents .form-control,
+.content .bg .form-control {
+  font-size: 18px;
+}
+.content .btn {
+  height: 50px;
+  font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+.content .contents .form-group label,
+.content .bg .form-group label {
+  font-size: 10px;
+}
+.content .contents .form-control,
+.content .bg .form-control {
+  font-size: 16px;
+  }
+  .content .btn {
+  height: 46px;
+  font-size: 12px;
+  }
+}
+
+.content .contents {
+  box-shadow: 0 10px 20px rgba(30, 40, 51, 0.1);
+}
+
 
 .content .contents .form-group,
 .content .bg .form-group {
@@ -70,16 +148,41 @@ h2 {
 
 }
 
+/* fade-in animation for the label */
 .content .contents .form-group label,
 .content .bg .form-group label {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
-  transition: .3s all ease;
+  opacity: 0;
+  transform: translateY(50%);
+  animation: fade-in 0.5s ease forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.content .btn:hover {
+  background-color: #1e2833;
+  color: #fff;
+}
+
+
+.content .contents .form-group label,
+.content .bg .form-group label {
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 15px 15px;
+  border-bottom: none;
+  position: relative;
+  opacity: 0;
+  transform: translateY(50%);
+  animation: fade-in 0.5s ease forwards;
 }
 
 .content .contents .form-group input,
@@ -96,6 +199,7 @@ h2 {
 .content .bg .form-group input:focus {
   outline: none;
 }
+
 
 .center-align {
   text-align: center;
@@ -124,7 +228,16 @@ h2 {
   display: block;
   margin-bottom: 0;
   color: #b3b3b3;
+  animation: fade-in 0.5s ease forwards;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
+
+.content .contents .form-group.focus label,
+.content .bg .form-group.focus label {
+  color: #1e2833;
+  font-size: 12px;
+}
+
 
 .content .contents .form-group.focus,
 .content .bg .form-group.focus {
@@ -134,7 +247,15 @@ h2 {
 .content .contents .form-group.field--not-empty label,
 .content .bg .form-group.field--not-empty label {
   margin-top: -20px;
+  transition: margin-top 0.2s ease-in-out;
 }
+
+.content .contents .form-group input:focus,
+.content .bg .form-group input:focus {
+  background-color: #f8fafb;
+  font-size: 14px;
+}
+
 
 .content .contents .form-control,
 .content .bg .form-control {
@@ -167,43 +288,55 @@ h2 {
   height: 54px;
   padding-left: 30px;
   padding-right: 30px;
+  border-radius: 7px;
+  border: none;
+  background-color: #1e2833;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.content .forgot-pass {
-  position: relative;
-  top: 2px;
-  font-size: 14.5px;
-}
+.content .forgot-pass,
 .content .forgot-username {
-  position: relative;
-  top: 2px;
-  font-size: 14px;
+  font-size: 12px;
+  color: #b3b3b3;
 }
+
+.content .forgot-pass:hover,
+.content .forgot-username:hover {
+  color: #1e2833;
+}
+
 
 .social-login a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  position: relative;
-  text-align: center;
   color: #fff;
-  margin-bottom: 10px;
+  margin-right: 10px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  display: inline-block;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .social-login a span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  display: none;
 }
 
 .social-login a:hover {
+  background-color: #1e2833;
+}
+
+.social-login a:hover span {
   color: #fff;
 }
+
 
 .social-login a.facebook {
   background: #3b5998;
@@ -228,6 +361,61 @@ h2 {
 .social-login a.google:hover {
   background: #e82e1e;
 }
+
+.social-login a svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  margin-right: 5px;
+}
+
+.social-login a i {
+  font-size: 20px;
+  color: #b3b3b3;
+}
+
+
+.social-login a.facebook svg {
+  fill: #fff;
+}
+
+.social-login a.google svg {
+  fill: #fff;
+}
+
+.social-login a[aria-label="Facebook"] {
+  background-color: #3b5998;
+}
+
+.social-login a[aria-label="Google"] {
+  background-color: #ea4335;
+}
+
+@media only screen and (max-width: 768px) {
+  .social-login a {
+    width: 40px;
+    height: 40px;
+  }
+  .social-login a span {
+    font-size: 14px;
+  }
+}
+
+.btn {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-icon {
+  padding: 10px 20px;
+}
+
+.btn-icon i {
+  margin-right: 10px;
+}
+
 
 .control {
   display: block;

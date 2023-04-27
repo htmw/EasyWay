@@ -47,6 +47,12 @@ h2 {
   }
 }
 
+.content .contents {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
 .content .contents,
 .content .bg {
   width: 50%;
@@ -60,6 +66,20 @@ h2 {
   }
 }
 
+.content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 .content .contents .form-group,
 .content .bg .form-group {
   overflow: hidden;
@@ -68,6 +88,12 @@ h2 {
   border-bottom: none;
   position: relative;
 
+}
+
+.content .contents .form-group:focus-within,
+.content .bg .form-group:focus-within {
+  border-color: #1e90ff;
+  box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.1);
 }
 
 .content .contents .form-group label,
@@ -127,6 +153,43 @@ h2 {
   color: #b3b3b3;
 }
 
+.content .contents .form-group label,
+.content .bg .form-group label {
+  transition: all 0.3s ease;
+}
+
+.content .contents .form-group input,
+.content .bg .form-group input {
+  transition: all 0.3s ease;
+}
+
+.content .contents .form-group.focus label,
+.content .contents .form-group.field--not-empty label,
+.content .bg .form-group.focus label,
+.content .bg .form-group.field--not-empty label {
+  transform: translateY(-15px);
+  font-size: 12px;
+}
+
+.center-align input {
+  transition: all 0.3s ease;
+}
+
+.center-align input:hover {
+  transform: scale(1.05);
+}
+
+.content .btn:hover {
+  background-color: #1e2833;
+  color: white;
+}
+
+.social-login a:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
 .content .contents .form-group.focus,
 .content .bg .form-group.focus {
   background: #fff;
@@ -143,6 +206,13 @@ h2 {
   padding: 0;
   font-size: 20px;
   border-radius: 0;
+}
+
+.content .contents .form-group.focus label,
+.content .contents .form-group.field--not-empty label,
+.content .bg .form-group.focus label,
+.content .bg .form-group.field--not-empty label {
+  color: #1e2833;
 }
 
 .content .contents .form-control:active,
@@ -320,11 +390,56 @@ h2 {
 
 /* Custom */
 #gender-select {
-  padding: 12px 12px;
+  padding: 12px;
   position: relative;
   border-radius: 6px;
   width: 100%;
+  background-color: #f5f5f5;
+  border: none;
+  outline: none;
+  font-size: 16px;
 }
+
+#gender-select:hover {
+  cursor: pointer;
+}
+
+#gender-select option {
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+#gender-select option:hover {
+  background-color: #e5e5e5;
+}
+
+
+#gender-select:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px #5e5ce6;
+}
+
+#gender-select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #aaa;
+}
+
+#gender-select select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 16px;
+  color: #555;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 
 .mb-4.form-input-style {
   margin-bottom: 1em !important;
