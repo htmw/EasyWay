@@ -1,0 +1,30 @@
+name: Algo
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Install dependencies
+      run: |
+        cd server
+        pip install -r requirements.txt
+        wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weights
+        wget https://pjreddie.com/media/files/yolov3-tiny.weights -O weights/yolov3-tiny.weights
+        python load_weights.py
+        python load_weights.py --weights ./weights/yolov3-tiny.weights --output ./weights/yolov3-tiny.tf --tiny
+    - name: Run the app
+      run: |
+        cd server
+        python app.py  &
+        sleep 90
+        pkill -f "python app.py"

@@ -1,56 +1,39 @@
 <!-- Header section -->
-<header class="bg-dark py-5 service-header blog-header">
-  <div class="container px-lg-5 my-5">
-    <h1 class="display-4 text-center text-white fw-bold">Blog</h1>
-  </div>
+<header class="bg-dark py-5 service-header">
+    <div class="container px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Blog</h1>
+        </div>
+    </div>
 </header>
 
 <!-- Blog section -->
-<section class="py-5 blog-post">
+<section class="py-5">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
+    <div class="row">
+      <div class="col-md-20">
+        <!-- Blog posts -->
         <ul class="list-unstyled">
-          <!-- Loop through each post and display its details -->
-          <li class="media mb-4" *ngFor="let post of posts">
-            <div class="row">
-              <div class="col-md-4">
-                <span class="image featured"><img class="image-padding" [src]="imageURL + post.image_name" alt="" width="200"/></span>
-              </div>
-              <div class="col-md-8">
-                <div class="media-body">
-                  <!-- Link to the post details page -->
-                  <a routerLink="/blog/{{ post.id }}">
-                    <h3 class="mb-0">{{ post.title }}</h3>
-                  </a>
-                  <!-- Display the post creation date -->
-                  <small class="d-block text-muted mb-2">{{ post.created_at | date:'MMM d, y' }}</small>
-                  <!-- Display the post content -->
-                  <p class="mb-3">{{ post.content }}</p>
-                  <div class="read-more">
-                    <!-- Link to the post details page -->
-                    <a class="btn btn-primary" (click)="goToBlogDetails(post.id)">Load Comments</a>
+          <li *ngFor="let blog of blogs" class="mb-4">
+            <div class = "blog-post">
+              <h1>{{ blog.title }}</h1>
+              <span class="image featured"><img class="image-padding" [src]="imageURL + blog.image_name" alt="" width="300"/></span>
+              <p>{{ blog.content }}</p>
+              <button class="btn btn-primary" (click)="loadComments(blog.id)">Load comments</button>
+              <ul *ngIf="selectedBlogId === blog.id" class="mt-3">
+                <li *ngFor="let comment of comments" class="mb-3">
+                  <p>{{ comment.content }}</p>
+                  <p>{{ comment.created_at }}</p>
+                </li>
+                <form (submit)="addComment(commentForm)" #commentForm="ngForm" class="mb-4">
+                  <h4>Add Comment</h4>
+                  <div class="form-group">
+                    <label for="content">Comment</label>
+                    <textarea class="form-control" name="content" id="content" rows="3" required [(ngModel)]="commentContent!"></textarea>
                   </div>
-                  <ul>
-                    <br>
-                    <!-- Loop through each comment of the post and display its details -->
-                    <li *ngFor="let comment of comments">
-                      <div>{{ comment.content }}</div>
-                      <!-- Display the comment creation date -->
-                      <small class="d-block text-muted mb-2">{{ comment.created_at | date:'MMM d, y' }}</small>
-                    </li>
-                    <br>
-                  </ul>
-                  <form (ngSubmit)="onSubmit(post.id)" #commentForm="ngForm">
-                    <div class="form-group">
-                      <label for="content">Add a comment</label>
-                      <textarea class="form-control" id="content" name="content" [(ngModel)]="newComment.content" required></textarea>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary" [disabled]="!commentForm.valid">Submit</button>
-                  </form>
-                </div>
-              </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </ul>
             </div>
           </li>
         </ul>

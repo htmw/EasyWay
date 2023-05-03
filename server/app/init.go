@@ -14,9 +14,13 @@ func (a *App) DBMigrate() {
 	a.DB.AutoMigrate().DropTable(&model.Blog{})
 	a.DB.AutoMigrate().DropTable(&model.Comment{})
 	a.DB.AutoMigrate(&model.UploadedFile{})
+	a.DB.AutoMigrate(&model.EmailValidationResponse{})
+	a.DB.AutoMigrate(&model.ForgotUsernameReqBody{})
+	a.DB.AutoMigrate(&model.ForgotPasswordReqBody{})
+	a.DB.AutoMigrate(&model.CommentInput{})
 
 	// Migrate the schema and create tables
-	a.DB.AutoMigrate(&model.User{}, &model.Service{}, &model.Booking{}, &model.CityServiceMapping{}, &model.Blog{}, &model.Comment{}, &model.UploadedFile{})
+	a.DB.AutoMigrate(&model.User{}, &model.Service{}, &model.Booking{}, &model.CityServiceMapping{}, &model.Blog{}, &model.Comment{}, &model.UploadedFile{}, &model.EmailValidationResponse{}, &model.ForgotUsernameReqBody{}, &model.ForgotPasswordReqBody{}, &model.CommentInput{})
 
 	// Create some dummy users
 	a.DB.Create(&model.User{
@@ -159,7 +163,6 @@ func (a *App) DBMigrate() {
 	// Create some dummy Comments
 	a.DB.Create(&model.Comment{
     Id:        1,
-    UserId:    1,
     BlogId:    1,
     Content:   "Great article, very informative!",
     CreatedAt: "2023-04-25 09:30",
@@ -167,7 +170,6 @@ func (a *App) DBMigrate() {
 	})
 	a.DB.Create(&model.Comment{
     Id:        2,
-    UserId:    2,
     BlogId:    1,
     Content:   "I totally agree, on-demand services are the way to go!",
     CreatedAt: "2023-04-25 10:15",
@@ -175,19 +177,9 @@ func (a *App) DBMigrate() {
 	})
 	a.DB.Create(&model.Comment{
     Id:        3,
-    UserId:    3,
     BlogId:    2,
     Content:   "I had a bad experience with an on-demand cleaning service, they didn't do a good job",
     CreatedAt: "2023-04-25 11:20",
     UpdatedAt: "2023-04-25 11:20",
-	})
-
-	// Create some dummy uploaded files
-	a.DB.Create(&model.UploadedFile{
-    Id:           1,
-    FileName:     "example.jpg",
-    FilePath:     "/uploads/example.jpg",
-    ContentType:  "image/jpeg",
-    Size:         1024,
 	})
 }

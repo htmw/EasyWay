@@ -11,6 +11,7 @@ import (
 )
 
 func GetAllServices(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	services := []model.Service{}
 	db.Find(&services)
 	respondJSON(w, http.StatusOK, services)
@@ -91,6 +92,9 @@ func CreateService(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 // SearchServiceByName searches for services that match the given name
 func SearchServiceByName(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+  w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+  w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 	query := r.URL.Query().Get("name")
 
 	if len(query) >= 3 {

@@ -240,3 +240,22 @@ ul.actions.special li:first-child {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transform: scale(1.1);
 }
+
+a[routerLink="/bookService"] {
+  display: inline-block;
+  padding: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+a[routerLink="/bookService"]:hover {
+  background-color: #388E3C;
+}
+
+/* Add margin to the detection item */
+.detection-item {
+  margin-bottom: 10px;
+}

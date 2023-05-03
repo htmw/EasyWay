@@ -1,21 +1,23 @@
 <header id="header" [ngClass]="this.currentRoute == '/' || this.currentRoute == '/home' || this.currentRoute == '/blog' || this.currentRoute == '/upload' || this.currentRoute == '/services' || this.currentRoute == '/bookings' ? 'alt' : 'nav-alt'">
-  <h3><a routerLink="/home">EasyWay</a></h3>
+  <h3 class="logo"><a routerLink="/home">EasyWay</a></h3>
   <nav id="nav">
     <ul>
       <i class="fa fa-search search-icon"></i>
-      <li class="dropdown">
-        <form action="/search" method="get">
-          <div class="search-container">
+      <li style="white-space: nowrap;">
+        <form action="/search" method="get" class="search-container">
+          <div class="search-bar">
             <input type="text" placeholder="Search for services..." (input)="searchServices($event)" />
-            <datalist id="search-results" *ngIf="showDropdown">
-              <option *ngFor="let item of searchResults" [value]="item.name" (click)="selectService(item)"></option>
-            </datalist>
           </div>
+          <ul class="dropdown-menu" [ngClass]="{'show': showDropdown}" style="background-color: grey;">
+            <li *ngFor="let item of searchResults">
+              <a href="#" (click)="selectService($event, item.id, item.name)">{{item.name}}</a>
+            </li>
+          </ul>
         </form>
       </li>
-      <li style="white-space: nowrap;"><a href="/home">Home</a></li>
+      <li style="white-space: nowrap;"><a routerLink="/home">Home</a></li>
       <li style="white-space: nowrap;">
-        <i class="fa fa-camera" aria-hidden="true" routerLink="/upload"></i>
+        <a class="fa fa-camera" aria-hidden="true" routerLink="/upload"></a>
         <a routerLink="/services" routerLinkActive="active">Book a Service</a>
         <a routerLink="/blog" routerLinkActive="active">Blog</a>
       </li>

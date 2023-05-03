@@ -5,7 +5,9 @@
     </div>
   </div>
 </header>
+
 <br>
+
 <div class="upload">
   <form (submit)="onSubmit($event)">
     <div class="file-input-wrapper">
@@ -14,9 +16,55 @@
         <i class="fas fa-upload"></i> Select a file
       </label>
     </div>
-    <img class="preview" *ngIf="selectedFile" [src]="selectedFileUrl" />
+
+    <!-- Use the Elvis operator to simplify the *ngIf condition -->
+    <img class="preview" *ngIf="selectedFileUrl?.length" [src]="selectedFileUrl" />
+
     <button type="submit">Upload</button>
-    <div *ngIf="uploadSuccess">Upload successful!</div>
+
+    <!-- Use the truthiness of the variable to simplify the *ngIf condition -->
+    <div *ngIf="uploadSuccess">
+      <br>
+      Upload successful!
+
+      <div *ngFor="let obj of uploadResponse?.response">
+        <ul>
+
+          <!-- Use the Elvis operator to simplify the *ngFor loop -->
+          <ng-container *ngFor="let detection of obj?.detections">
+            <li class="detection-item">
+              Detected: {{ detection.class }}
+
+              <!-- Use a variable to hold the list of furniture types -->
+              <ng-container *ngIf="furnitureTypes.includes(detection.class)">
+                <a routerLink="/bookService" [queryParams]="furnitureService">
+                  Click here to book furniture repair services
+                </a>
+              </ng-container>
+
+              <!-- Use a variable to hold the list of plumbing types -->
+              <ng-container *ngIf="plumbingTypes.includes(detection.class)">
+                <a routerLink="/bookService" [queryParams]="plumbingService">
+                  Click here to book plumbing services
+                </a>
+              </ng-container>
+
+            </li>
+          </ng-container>
+
+        </ul>
+      </div>
+
+      <!-- Use the truthiness of the variable to simplify the *ngIf condition -->
+      <button *ngIf="showDetectionImage" (click)="fetchDetectionImage()">Fetch Detection Image</button>
+
+      <!-- Use the safe navigation operator to simplify the *ngIf condition -->
+      <div *ngIf="imageUrl">
+        <img class="preview" [src]="imageUrl" alt="Detection Image">
+      </div>
+    </div>
+
+    <!-- Use the truthiness of the variable to simplify the *ngIf condition, and use the Elvis operator to simplify the interpolation -->
     <div *ngIf="errorMessage">{{ errorMessage }}</div>
   </form>
 </div>

@@ -1,14 +1,17 @@
 package handler
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 	"net/smtp"
 	"crypto/rand"
+	"encoding/json"
 
+	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"github.com/sendgrid/sendgrid-go"
+  "github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/ksharma67/EasyWay/server/app/model"
 )
 
@@ -33,6 +36,27 @@ func CreateUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	respondJSON(w, http.StatusCreated, user)
+}
+
+func GetUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	username := vars["username"]
+	user := getUserOr404NoPass(db, username, w, r)
+	if user == nil {
+		return
+	}
+	respondJSON(w, http.StatusOK, user)
+}
+
+// getUserOr404 gets a user instance if exists, or respond the 404 error otherwise
+func getUserOr404NoPass(db *gorm.DB, username string, w http.ResponseWriter, r *http.Request) *model.User {
+	user := model.User{}
+	if err := db.First(&user, model.User{Username: username}).Error; err != nil {
+		respondError(w, http.StatusNotFound, err.Error())
+		return nil
+	}
+	return &user
 }
 
 func Login(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
@@ -91,116 +115,164 @@ func GetUserDetails(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func ForgotUsername(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Content-Type", "application/json")
-    w.Header().Set("Access-Control-Allow-Methods", "POST")
-    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-    var user model.User
-    decoder := json.NewDecoder(r.Body)
-    if err := decoder.Decode(&user); err != nil {
-        respondError(w, http.StatusBadRequest, err.Error())
-        return
-    }
+	decoder := json.NewDecoder(r.Body)
+	reqBody := model.ForgotUsernameReqBody{}
+	if err := decoder.Decode(&reqBody); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	defer r.Body.Close()
 
-    defer r.Body.Close()
+	user := model.User{}
+	if err := db.Where("email = ?", reqBody.Email).First(&user).Error; err != nil {
+		respondError(w, http.StatusNotFound, "User not found")
+		return
+	}
 
-    // Check if the email exists in the database
-    if err := db.Where("email = ?", user.Email).First(&user).Error; err != nil {
-        respondError(w, http.StatusNotFound, "Email not found")
-        return
-    }
+	// generate a temporary username
+	tempUsername := generateRandomString(10)
+	if err := db.Model(&user).Update("username", tempUsername).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-    // Send the username to the user's email
-    sendEmail(user.Email, user.Username)
+	// send email with temporary username
+	err := sendForgotUsernameEmail(user.Email, tempUsername)
+	if err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-    respondJSON(w, http.StatusOK, map[string]string{"message": "Username sent to email"})
+	respondJSON(w, http.StatusOK, map[string]string{"message": "A username has been sent to your email"})
 }
 
-func sendEmail(email, username string) error {
-    from := "your-email@example.com"
-    password := "your-email-password"
-    to := []string{email}
+func generateRandomString(n int) string {
+	const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	b := make([]byte, n)
+	rand.Read(b)
+	for i := 0; i < n; i++ {
+		b[i] = letters[int(b[i])%len(letters)]
+	}
+	return string(b)
+}
 
-    msg := "From: " + from + "\n" +
-        "To: " + email + "\n" +
-        "Subject: Your username on our platform\n\n" +
-        "Hello,\n\n" +
-        "Your username on our platform is: " + username + "\n\n" +
-        "Thanks for using our platform!"
+func sendForgotUsernameEmail(to string, tempUsername string) error {
+    from := mail.NewEmail("EasyWay", "noreply@easyway.com")
+    subject := "Forgot Username"
+    toEmail := mail.NewEmail("", to)
+    bodyMessage := "Dear user,\n\n" +
+        "Your temporary username is " + tempUsername + ". Please use this username to login and reset your username.\n\n" +
+        "Best regards,\n" +
+        "The EasyWay team"
+    plainTextContent := bodyMessage
+    htmlContent := bodyMessage
 
-    auth := smtp.PlainAuth("", from, password, "smtp.gmail.com")
-
-    err := smtp.SendMail("smtp.gmail.com:587", auth, from, to, []byte(msg))
+    message := mail.NewSingleEmail(from, subject, toEmail, plainTextContent, htmlContent)
+    client := sendgrid.NewSendClient("")
+    _, err := client.Send(message)
     if err != nil {
         return err
     }
-
     return nil
+}
+
+
+// sendEmail sends an email with the given subject and message to the given email address using SMTP
+func sendEmail(to, subject, message string) error {
+	from := "easyway@example.com" // Update with your email address
+	password := "yourpassword"    // Update with your email password
+
+	// Setup SMTP connection
+	auth := smtp.PlainAuth("", from, password, "smtp.gmail.com")
+	smtpAddr := "smtp.gmail.com:587"
+	connection, err := smtp.Dial(smtpAddr)
+	if err != nil {
+		return err
+	}
+	defer connection.Close()
+
+	if err = connection.StartTLS(nil); err != nil {
+		return err
+	}
+
+	if err = connection.Auth(auth); err != nil {
+		return err
+	}
+
+	if err = connection.Mail(from); err != nil {
+		return err
+	}
+
+	if err = connection.Rcpt(to); err != nil {
+		return err
+	}
+
+	messageBody := []byte("To: " + to + "\r\n" +
+		"Subject: " + subject + "\r\n" +
+		"\r\n" +
+		message + "\r\n")
+	if err = smtp.SendMail(smtpAddr, auth, from, []string{to}, messageBody); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func ForgotPassword(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-    var user model.User
-    decoder := json.NewDecoder(r.Body)
-    if err := decoder.Decode(&user); err != nil {
-        respondError(w, http.StatusBadRequest, err.Error())
-        return
-    }
+	decoder := json.NewDecoder(r.Body)
+	reqBody := model.ForgotPasswordReqBody{}
+	if err := decoder.Decode(&reqBody); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	defer r.Body.Close()
 
-    defer r.Body.Close()
+	user := model.User{}
+	if err := db.Where("email = ?", reqBody.Email).First(&user).Error; err != nil {
+		respondError(w, http.StatusNotFound, "User not found")
+		return
+	}
 
-    // Check if the email exists in the database
-    if err := db.Where("email = ?", user.Email).First(&user).Error; err != nil {
-        respondError(w, http.StatusNotFound, "Email not found")
-        return
-    }
+	// generate a temporary password
+	tempPassword := generateRandomString(10)
+	if err := db.Model(&user).Update("password", tempPassword).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-    // Generate a new random password
-    newPassword := generateRandomString(10)
+	// send email with temporary password
+	err := sendForgotPasswordEmail(user.Email, tempPassword)
+	if err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-    // Update the user's password in the database
-    if err := db.Model(&user).Update("password", newPassword).Error; err != nil {
-        respondError(w, http.StatusInternalServerError, err.Error())
-        return
-    }
-
-    // Send the new password to the user's email
-    sendEmail(user.Email, newPassword)
-
-    respondJSON(w, http.StatusOK, map[string]string{"message": "New password sent to email"})
+	respondJSON(w, http.StatusOK, map[string]string{"message": "A temporary password has been sent to your email"})
 }
 
-func generateRandomString(length int) string {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    randomBytes := make([]byte, length)
-    rand.Read(randomBytes)
-    for i := 0; i < length; i++ {
-        randomBytes[i] = charset[int(randomBytes[i])%len(charset)]
-    }
-    return string(randomBytes)
-}
+func sendForgotPasswordEmail(to string, tempPassword string) error {
+	from := mail.NewEmail("EasyWay", "noreply@easyway.com")
+	subject := "Forgot Password"
+	toEmail := mail.NewEmail("", to)
+	bodyMessage := "Dear user,\n\n" +
+		"Your temporary password is " + tempPassword + ". Please use this password to login and reset your password.\n\n" +
+		"Best regards,\n" +
+		"The EasyWay team"
+	plainTextContent := bodyMessage
+	htmlContent := bodyMessage
 
-
-func sendPasswordResetEmail(email, resetLink string) error {
-    from := "noreply@easyway.com"
-    password := "your-email-password"
-    to := []string{email}
-
-    msg := "From: " + from + "\n" +
-        "To: " + email + "\n" +
-        "Subject: Password reset instructions\n\n" +
-        "Hello,\n\n" +
-        "Please click on the following link to reset your password: " + resetLink + "\n\n" +
-        "If you did not request a password reset, please ignore this email.\n\n" +
-        "Thanks for using our platform!"
-
-    auth := smtp.PlainAuth("", from, password, "smtp.gmail.com")
-
-    err := smtp.SendMail("smtp.gmail.com:587", auth, from, to, []byte(msg))
-    if err != nil {
-        return err
-    }
-
-    return nil
+	message := mail.NewSingleEmail(from, subject, toEmail, plainTextContent, htmlContent)
+	client := sendgrid.NewSendClient("")
+	_, err := client.Send(message)
+	return err
 }

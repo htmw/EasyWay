@@ -123,3 +123,57 @@ func getBookingInfo(db *gorm.DB, custId int, w http.ResponseWriter, r *http.Requ
 	booking := model.Booking{}
 	return &booking
 }
+
+//EditBooking API
+func EditBooking(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Methods", "PUT")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	fmt.Println("Logged EditBooking:PUT")
+	booking := model.Booking{}
+
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&booking); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	defer r.Body.Close()
+
+	// Find the booking to be updated
+	id := r.URL.Query().Get("id")
+	var existingBooking model.Booking
+	if err := db.Where("id = ?", id).First(&existingBooking).Error; err != nil {
+		respondError(w, http.StatusBadRequest, "Booking not found")
+		return
+	}
+
+	// Check if the updated time slot is available
+	var bookings []model.Booking
+	db.Where("service_id = ? ", booking.ServiceId).Find(&bookings)
+	for _, b := range bookings {
+		if b.Id == existingBooking.Id {
+			continue
+		}
+		start := b.StartTime
+		end := b.EndTime
+		date := b.Date
+		if booking.Date == date && booking.EndTime <= end && booking.StartTime >= start {
+			respondError(w, http.StatusInternalServerError, "Time slot unavailable")
+			return
+		}
+	}
+
+	// Update the booking
+	existingBooking.ServiceId = booking.ServiceId
+	existingBooking.UserId = booking.UserId
+	existingBooking.Date = booking.Date
+	existingBooking.StartTime = booking.StartTime
+	existingBooking.EndTime = booking.EndTime
+	if err := db.Save(&existingBooking).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondJSON(w, http.StatusOK, existingBooking)
+}

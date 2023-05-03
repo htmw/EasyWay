@@ -39,7 +39,7 @@ Interactive Elements: The interactive elements, such as buttons and links, are d
 
 The back-end of the EasyWay web application is designed using Node JS, a popular framework for building scalable and performant applications. The back-end design includes the following components:
 
-![Go Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml)
+![Go Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/go.yml)
 
 * **RESTful API:** The back-end provides a RESTful API for the front-end to communicate with the server.
 * **Database Access:** The back-end interacts with the MySQL database system to store and retrieve data.
@@ -48,6 +48,8 @@ The back-end of the EasyWay web application is designed using Node JS, a popular
 ### Object Detection using Deep Learning
 
 One of the key features of the EasyWay web application is its ability to detect objects in images submitted by users. This is accomplished using a state-of-the-art deep learning algorithm for object detection.
+
+[![Algo](https://github.com/htmw/EasyWay/actions/workflows/algo.yml/badge.svg)](https://github.com/ksharma67/EasyWay/actions/workflows/algo.yml) - [Algo Continuous Integration](https://github.com/htmw/EasyWay/actions/workflows/algo.yml)
 
 #### How Object Detection using Deep Learning Works
 
@@ -92,9 +94,10 @@ Our application is structured as follows:
 ## Technology Stack:
 * Framework : Angular
 * Backend : GoLang
+* Object Detection Server - Flask
 * Database : MySQL (GORM Library)
 * Version Control: Git
-* Code Editor : Visual Studio Code
+* Code Editor : Visual Studio Code, Atom
 
 ## Project Board:
 
@@ -130,6 +133,41 @@ cd ./server/
 go run main.go
 ```
 Ignore any errors as it will check for required datatables (show the error), then automatically creates the datatables.
+
+## Running Backend Server Algorithm Server:
+
+* Clone the repository
+```
+git clone https://github.com/htmw/EasyWay.git
+```
+* Install Python from https://www.python.org/downloads/
+* Install Pip from https://pip.pypa.io/en/stable/installation/
+* Navigate to server folder and run go server:
+```
+cd ./server/
+```
+* Install the required libraries
+```
+# TensorFlow CPU
+pip install -r requirements.txt
+
+# TensorFlow GPU
+pip install -r requirements-gpu.txt
+```
+* For Linux: Let's download official yolov3 weights pretrained on COCO dataset.
+```
+# Downloading yolov3 weights
+wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weights
+```
+* Load the weights using `load_weights.py` script. This will convert the yolov3 weights into TensorFlow .ckpt model files!
+```
+# Loading yolov3 weights
+python load_weights.py
+```
+* Starting the Flask Server
+```
+python app.py
+```
 
 ## Running Frontend Server:
 

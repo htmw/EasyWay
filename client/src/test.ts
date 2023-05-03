@@ -5,23 +5,10 @@ import { getTestBed } from '@angular/core/testing'; // Import getTestBed from an
 import {
 BrowserDynamicTestingModule,
 platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing'; // Import BrowserDynamicTestingModule and platformBrowserDynamicTesting for testing Angular components
-
-declare const require: {
-context(path: string, deep?: boolean, filter?: RegExp): {
-<T>(id: string): T;
-keys(): string[];
-};
-};
+} from '@angular/platform-browser-dynamic/testing';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
 BrowserDynamicTestingModule,
 platformBrowserDynamicTesting(),
-); // Initializing the testing environment using BrowserDynamicTestingModule and platformBrowserDynamicTesting
-
-// Then we find all the tests.
-const context = require.context('./', true, /.spec.ts$/); // Get all the .spec.ts files in current directory recursively
-
-// And load the modules.
-context.keys().map(context); // Load all the .spec.ts files using the context object
+); // Load all the .spec.ts files using the context object

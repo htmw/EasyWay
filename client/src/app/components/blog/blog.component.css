@@ -50,11 +50,21 @@
   margin-bottom: 16px;
 }
 
-.blog-post p {
-  font-size: 16px;
-  color: #6c757d;
+.blog-post h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #343a40;
   margin-bottom: 16px;
 }
+
+
+.blog-post p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 24px;
+}
+
 
 .blog-post a {
   display: inline-block;
@@ -72,6 +82,30 @@
   background-color: #343a40;
   color: #fff;
 }
+
+.blog-post .image.featured {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+}
+
+.blog-post .image.featured img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.blog-post .image.featured:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
 
 /* Animation */
 @keyframes fadein {
@@ -115,4 +149,47 @@ to { transform: translateY(0); }
   border-color: #005cbf;
   transform: translateY(0.1rem);
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
+}
+
+.comment-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-top: 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.comment-form label {
+  font-size: 18px;
+  color: #343a40;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #343a40;
+}
+
+.comment-form input[type="submit"] {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.comment-form input[type="submit"]:hover {
+  background-color: #6c757d;
 }

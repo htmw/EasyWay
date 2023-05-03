@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -9,14 +11,14 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class RegisterComponent implements OnInit {
-  
-  registerForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    gender : new FormControl(''),
-    username: new FormControl(''),
-    password : new FormControl(''),
-    confirmPassword: new FormControl('')
+
+  registerForm = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+    email: new UntypedFormControl(''),
+    gender : new UntypedFormControl(''),
+    username: new UntypedFormControl(''),
+    password : new UntypedFormControl(''),
+    confirmPassword: new UntypedFormControl('')
   });
 
   isAlpha(text: string) {
@@ -36,9 +38,9 @@ export class RegisterComponent implements OnInit {
 
   validatePass(pass: string) {
     var passw=  /^[A-Za-z]\w{7,14}$/;
-    if (pass.match(passw)) { 
+    if (pass.match(passw)) {
       return true;
-    } else { 
+    } else {
       return false;
     }
   }
@@ -114,6 +116,7 @@ export class RegisterComponent implements OnInit {
         .subscribe(response => {
           console.log(response);
           confirm("Registration success");
+          this.router.navigate(['/login']); // redirect to login component
         },
         err => {
           alert("user exists already");
@@ -121,18 +124,18 @@ export class RegisterComponent implements OnInit {
       )
     }
   }
-  
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void { }
 
   highlight(event: any): void {
-    event.target.style['border-bottom'] = "1px solid rgba(30, 40, 51, 0.9)";      
-    event.target.style['opacity'] = "0.9";           
+    event.target.style['border-bottom'] = "1px solid rgba(30, 40, 51, 0.9)";
+    event.target.style['opacity'] = "0.9";
   }
 
   dampen(event: any): void {
-    event.target.style['border-bottom'] = "1px solid rgba(30, 40, 51, 0.6)";      
-    event.target.style['opacity'] = "0.6";           
+    event.target.style['border-bottom'] = "1px solid rgba(30, 40, 51, 0.6)";
+    event.target.style['opacity'] = "0.6";
   }
 }

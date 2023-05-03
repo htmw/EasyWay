@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"log"
 
+	"github.com/rs/cors"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"github.com/ksharma67/EasyWay/server/app/handler"
@@ -29,6 +30,17 @@ func (a *App) Initialize(config *config.Config) {
 
 	a.DB = db
 	a.Router = mux.NewRouter().PathPrefix("/api").Subrouter()
+
+	// Enable CORS
+    c := cors.New(cors.Options{
+        AllowedOrigins: []string{"*"},
+        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowedHeaders: []string{"Content-Type"},
+    })
+
+	// Use the CORS middleware
+	a.Router.Use(c.Handler)
+
 	a.setRouters()
 }
 
@@ -36,6 +48,8 @@ func (a *App) Initialize(config *config.Config) {
 func (a *App) setRouters() {
 	// Routing for handling the projects
 	a.Get("/getServices", a.GetAllServices)
+	a.Post("/user", a.CreateUser)
+	a.Get("/user/{username}", a.GetUser)
 	a.Post("/createService", a.CreateService)
 	a.Post("/register", a.CreateUser)
 	a.Post("/login", a.Login)
@@ -47,12 +61,14 @@ func (a *App) setRouters() {
 	a.Get("/getServiceInfo", a.GetServiceInfo)
 	a.Get("/getUserDetails", a.GetUserDetails)
 	a.Get("/getAllBlogs", a.GetAllBlogs)
-	a.Get("/getAllComments", a.GetAllComments)
-	a.Get("/searchServiceByName", a.SearchServiceByName)
+	a.Get("/getAllComments/{id:[0-9]+}", a.GetAllComments)
+	a.Get("/services/search", a.SearchServiceByName)
 	a.Post("/forgotUsername", a.ForgotUsername)
 	a.Post("/forgotPassword", a.ForgotPassword)
 	a.Post("/createUploadedFile", a.CreateUploadedFile)
-	a.Post("/addComment", a.AddComment)
+	a.Post("/blogs/{id}/comments", a.AddComment)
+	a.Put("/updateBooking", a.EditBooking)
+	a.Get("/detection", a.GetDetectionImage)
 }
 
 // Wrap the router for GET method
@@ -73,6 +89,10 @@ func (a *App) Put(path string, f func(w http.ResponseWriter, r *http.Request)) {
 // Wrap the router for DELETE method
 func (a *App) Delete(path string, f func(w http.ResponseWriter, r *http.Request)) {
 	a.Router.HandleFunc(path, f).Methods("DELETE")
+}
+
+func (a *App) GetUser(w http.ResponseWriter, r *http.Request) {
+	handler.GetUser(a.DB, w, r)
 }
 
 // Handlers to manage Services Data
@@ -182,26 +202,26 @@ func (a *App) GetAllComments(w http.ResponseWriter, r *http.Request) {
   handler.GetAllComments(a.DB, w, r)
 }
 
-// SearchServices searches for services by name
+// Handlers to Search Services
 func (a *App) SearchServiceByName(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	handler.SearchServiceByName(a.DB, w, r)
+    w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+    w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+    handler.SearchServiceByName(a.DB, w, r)
 }
 
 //ForgotUsername
 func (a *App) ForgotUsername(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	handler.ForgotUsername(a.DB, w, r)
 }
 
-// Handler to initiate password reset process
+//ForgotPassword
 func (a *App) ForgotPassword(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -217,13 +237,34 @@ func (a *App) CreateUploadedFile(w http.ResponseWriter, r *http.Request) {
   handler.CreateUploadedFile(a.DB, w, r)
 }
 
+
 //AddComment
 func (a *App) AddComment(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
   handler.AddComment(a.DB, w, r)
+}
+
+// Handlers to update Bookings
+func (a *App) EditBooking(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("Called Routes: /bookService Method:PUT")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+    w.Header().Set("Access-Control-Allow-Methods", "PUT")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+    handler.EditBooking(a.DB, w, r)
+}
+
+// Handlers to Get Detected Image
+func (a *App) GetDetectionImage(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("Called Routes: /bookService Method:PUT")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+    w.Header().Set("Access-Control-Allow-Methods", "PUT")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+    handler.GetDetectionImage(w, r)
 }
 
 // Run the app on it's router

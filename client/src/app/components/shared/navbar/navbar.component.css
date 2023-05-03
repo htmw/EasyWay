@@ -1,5 +1,22 @@
 /* Header */
+.logo a {
+  display: inline-block;
+  animation: pulse 1s infinite;
+}
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Header */
 #header input[type="text"] {
   padding-left: 40px;
   background-position: 10px center;
@@ -128,8 +145,13 @@ body.landing #page-wrapper {
   padding-left: 0;
 }
 
+#header nav>ul>li ul {
+  background-color: <desired color>;
+}
+
 #header nav>ul>li>ul {
   display: none;
+  background-color: blue;
 }
 
 #header nav>ul>li a {
@@ -164,6 +186,15 @@ body.landing #page-wrapper {
   margin: 0 0 0 0.5em;
   position: relative;
 }
+
+#header nav>ul>li ul li a {
+  color: <desired color>;
+}
+
+#header nav>ul>li ul li a {
+  color: white;
+}
+
 
 #header input[type="submit"],
 #header input[type="reset"],
@@ -225,7 +256,7 @@ body.landing #page-wrapper {
   -webkit-animation: none;
   -ms-animation: none;
   animation: none;
-  /* background-color: #1e2833; */
+  background-color: #1e2833;
   color: rgba(255, 255, 255, 0.75);
   background: none;
   position: absolute;
@@ -323,7 +354,63 @@ body.landing #page-wrapper {
   display: block; /* Show on hover */
 }
 
-.dropdown-item.active {
+.search-container {
+  position: relative;
+}
+
+.dropdown-menu li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-menu li a:hover, .dropdown-menu li a:focus {
+  color: #fff;
+  background-color: #007bff;
+}
+
+
+/* Dropdown content (hidden by default) */
+#search-results {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  max-height: 200px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* Dropdown items */
+#search-results option {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Add a grey background color to dropdown links on hover */
+#search-results option:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+/* Add a blue background color to dropdown links when they are active */
+#search-results option.active {
   background-color: #007bff;
   color: #fff;
 }

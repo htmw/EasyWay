@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'
 import { GlobalConstants } from 'src/app/common/global-constants';
-import { flatMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { Blog } from './blog.model';
 import { Comment } from './comment.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-blog',
@@ -13,76 +12,47 @@ import { Comment } from './comment.model';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
-  posts: any[] = [];
-  comments: any[] = [];
+  blogs: Blog[] = [];
+  comments: Comment[] = [];
   imageURL = GlobalConstants.imageURL;
-  newComment: Comment = new Comment(0, 0, 0, '', new Date(), new Date());
+  selectedBlogId: number | null = null;
+  commentContent: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  readBlogs(service: any) {
-    if (localStorage.getItem('isLoggedIn') == 'false') {
-      alert('Please log-in to book to a service.')
-    } else {
-      this.router.navigate(['/blogs']);
-    }
+  ngOnInit() {
+    this.loadBlogs();
   }
 
-  ngOnInit(): void {
-    this.http.get<any>(GlobalConstants.apiURL + 'getAllBlogs')
-      .subscribe(data => {
-        console.log(data);
-        this.posts = data;
-      }, err => {
-        console.log(err);
-      });
+  loadBlogs() {
+    this.http.get<Blog[]>(GlobalConstants.apiURL + 'getAllBlogs').subscribe(blogs => {
+      this.blogs = blogs;
+    });
   }
 
-  getAllComments(blogId: number) {
-    this.http.get<any>(GlobalConstants.apiURL + 'getAllComments?blog_id=' + blogId)
-      .subscribe(data => {
-        console.log(data);
-        if (data && data.length > 0) {
-          this.comments = data;
-        } else {
-          this.comments = [];
-          console.log("No comments available for this blog post.");
-        }
-      }, err => {
-        console.log(err);
-      });
+  loadComments(blogId: number) {
+    this.selectedBlogId = blogId;
+    this.http.get<Comment[]>(GlobalConstants.apiURL + `getAllComments/${blogId}`).subscribe(comments => {
+      this.comments = comments;
+    });
   }
 
-  addComment(post: Blog) {
-    this.newComment.blogId = post.id;
-    this.newComment.created_at = new Date();
-    this.http.post<any>(GlobalConstants.apiURL + 'addComment', this.newComment)
-      .subscribe(data => {
-        console.log(data);
-        this.comments.push(data);
-        this.newComment = new Comment(0, 0, 0, '', new Date(), new Date());
-      }, err => {
-        console.log(err);
-      });
-  }
+  addComment(form: NgForm) {
+    const blogId = this.selectedBlogId;
+    const content = form.value.content;
 
-  goToBlogDetails(id: number): void {
-    // Call getAllComments() with the selected blog post's ID
-    this.getAllComments(id);
-    this.router.navigate(['/blog', id]);
-  }
+    const commentInput = { blogId, content };
+    console.log('commentInput:', commentInput);
 
-  onSubmit(blogId: number): void {
-      this.newComment.blogId = blogId;
-      this.newComment.created_at = new Date();
-      this.http.post<Comment>(GlobalConstants.apiURL + 'addComment', this.newComment)
-        .subscribe(data => {
-          console.log(data);
-          this.getAllComments(blogId);
-          this.newComment = new Comment(0, 0, 0, '', new Date(), new Date());
-        }, err => {
-          console.log(err);
-        });
-    }
+    this.http.post<Comment>(GlobalConstants.apiURL + `blogs/${blogId}/comments`, JSON.stringify(commentInput)).subscribe(
+      comment => {
+        console.log('comment added:', comment);
+        this.comments.push(comment);
+        form.reset();
+      },
+      error => {
+        console.error('error adding comment:', error);
+      }
+    );
+  }
 }

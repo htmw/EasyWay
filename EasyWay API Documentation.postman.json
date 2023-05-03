@@ -1,0 +1,1161 @@
+{
+	"info": {
+		"_postman_id": "014cb12e-fe98-431f-b510-8a529a3f89b0",
+		"name": "EasyWay API Documentation",
+		"description": "The **EasyWay's** API is a JSON-based API. All requests are made to endpoints beginning with: `http://localhost:3000/api` and `http://localhost:5000/`  \nRequests can be made with HTTP.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23815648",
+		"_collection_link": "https://easywayapis.postman.co/workspace/8691dc6b-dbf2-45ad-8fd6-25229db4786f/collection/23815648-014cb12e-fe98-431f-b510-8a529a3f89b0?action=share&creator=23815648&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Add user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"alex\",\n    \"email\": \"alex@pace.edu\",\n    \"gender\": \"F\",\n    \"username\": \"alex\",\n    \"password\": \"alex1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"alex\",\n    \"email\": \"alex@pace.edu\",\n    \"gender\": \"F\",\n    \"username\": \"alex\",\n    \"password\": \"alex1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Accept",
+							"value": "application/x-www-form-urlencoded"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Feb 2022 00:32:35 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"name\": \"alex\",\n    \"username\": \"alex\",\n    \"password\": \"alex1\",\n    \"email\": \"alex@pace.edu\",\n    \"gender\": \"F\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get user details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/dummy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"dummy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get user details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/user/dummy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"dummy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Feb 2022 00:33:36 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "104"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Dummy Duck\",\n    \"username\": \"dummy\",\n    \"password\": \"dumdum\",\n    \"email\": \"dummy@ufl.edu\",\n    \"gender\": \"M\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"services"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all services",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Feb 2022 00:34:25 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "639"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"AC Maintanence\",\n        \"description\": \"Any type of AC maintanence such as filter cleaning, part replacement, etc.\",\n        \"username\": \"Electronics\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Plumbing\",\n        \"description\": \"Sanitary and household plumbing. No sewage service.\",\n        \"username\": \"Household\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Saloon\",\n        \"description\": \"Haricut, massage, nailwork, makeup, etc.\",\n        \"username\": \"Personal Care\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Furniture Repair\",\n        \"description\": \"Furniture frame repair, drilling, fitting new furniture, etc.\",\n        \"username\": \"Household\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Exterminator\",\n        \"description\": \"Pest control, wildlife evac, alligator emergency, etc.\",\n        \"username\": \"Animal/Pet\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get bookings from a given user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/bookings/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"bookings",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get bookings from a given user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/bookings/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Feb 2022 00:36:10 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "135"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"user_id\": 0,\n    \"service_id\": 3,\n    \"date\": \"2022-02-15T16:30:00Z\",\n    \"start_time\": \"2022-02-15T16:30:00Z\",\n    \"end_time\": \"2022-02-15T17:30:00Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Book a service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"user_id\": 3,\n    \"service_id\": 4,\n    \"date\": \"2022-02-15\",\n    \"start_time\": \"12:30\",\n    \"end_time\": \"13:30\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/bookService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"bookService"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Book a service",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"user_id\": 1,\n    \"service_id\": 3,\n    \"date\": \"2022-02-15\",\n    \"start_date\": \"11:30\",\n    \"end_date\": \"13:30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/bookService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"bookService"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Accept",
+							"value": "application/x-www-form-urlencoded"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Feb 2022 05:02:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Error 1062: Duplicate entry '2' for key 'bookings.id'\"\n}"
+				},
+				{
+					"name": "Book a service",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4,\n    \"user_id\": 1,\n    \"service_id\": 4,\n    \"date\": \"2022-02-15\",\n    \"start_time\": \"11:30\",\n    \"end_time\": \"13:30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/bookService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"bookService"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Accept",
+							"value": "application/x-www-form-urlencoded"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Feb 2022 06:01:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "232"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"user_id\": 1,\n    \"service_id\": 4,\n    \"date\": \"2022-02-15\",\n    \"start_time\": \"11:30\",\n    \"end_time\": \"13:30\",\n    \"User\": {\n        \"id\": 0,\n        \"name\": \"\",\n        \"username\": \"\",\n        \"password\": \"\",\n        \"email\": \"\",\n        \"gender\": \"\"\n    },\n    \"Service\": {\n        \"id\": 0,\n        \"name\": \"\",\n        \"description\": \"\",\n        \"username\": \"\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"dummy@pace.edu\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/forgotPassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"forgotPassword"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Forgot Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"dummy@pace.edu\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/forgotPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"forgotPassword"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Apr 2023 17:14:33 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"A temporary password has been sent to your email\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Forgot Username",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"dummy@pace.edu\"     \n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/forgotUsername",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"forgotUsername"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Forgot Username",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"dummy@pace.edu\"     \n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/forgotUsername",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"forgotUsername"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Apr 2023 17:14:38 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"A temporary username has been sent to your email\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Blogs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/getAllBlogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"getAllBlogs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Blogs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/getAllBlogs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"getAllBlogs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 29 Apr 2023 19:06:12 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1762"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Why On-Demand Services are the Future of Convenience\",\n        \"content\": \"On-demand services have become a popular trend in recent years due to their convenience and accessibility. With the rise of smartphones and apps, people are able to order almost anything they need at the touch of a button. From food delivery to ride-sharing to home cleaning services, on-demand services offer a wide range of options for consumers. They eliminate the need for physical stores and the inconvenience of waiting in long lines or driving to multiple locations. With the COVID-19 pandemic accelerating the shift towards online and contactless services, on-demand services have become even more crucial for people looking to get what they need quickly and safely.\",\n        \"created_at\": \"2023-04-25 07:30\",\n        \"updated_at\": \"2023-04-25 07:32\",\n        \"image_name\": \"house_cleaning.jpg\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"The Pros and Cons of On-Demand Home Cleaning Services\",\n        \"content\": \"On-demand home cleaning services have become a popular choice for busy people looking to outsource their household chores. These services offer the convenience of scheduling and paying for cleaning online, without the need for face-to-face communication with the cleaners. However, there are some drawbacks to these services. One of the main concerns is the quality of the cleaning. With on-demand services, the cleaners may not be as thorough as you would like, and there may be a lack of consistency between different cleaners. Additionally, on-demand cleaning services can be more expensive than hiring a regular cleaner or cleaning yourself. They often charge a premium for the convenience and flexibility they offer.\",\n        \"created_at\": \"2023-04-25 09:15\",\n        \"updated_at\": \"2023-04-25 09:30\",\n        \"image_name\": \"refridgerator.jpg\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get All Comments of a Blog",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/getAllComments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"getAllComments",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Comments of a Blog",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/getAllComments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"getAllComments",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 29 Apr 2023 19:07:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "533"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"blog_id\": 1,\n        \"content\": \"Great article, very informative!\",\n        \"created_at\": \"2023-04-25 09:30\",\n        \"updated_at\": \"2023-04-25 09:30\"\n    },\n    {\n        \"id\": 2,\n        \"blog_id\": 1,\n        \"content\": \"I totally agree, on-demand services are the way to go!\",\n        \"created_at\": \"2023-04-25 10:15\",\n        \"updated_at\": \"2023-04-25 10:15\"\n    },\n    {\n        \"id\": 4,\n        \"blog_id\": 1,\n        \"content\": \"This is a new comment\",\n        \"created_at\": \"2023-04-29 14:47:28\",\n        \"updated_at\": \"2023-04-29 14:47:28\"\n    },\n    {\n        \"id\": 5,\n        \"blog_id\": 1,\n        \"content\": \"This is a new comment\",\n        \"created_at\": \"2023-04-29 14:50:19\",\n        \"updated_at\": \"2023-04-29 14:50:19\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"blog_id\": 0,\n    \"content\": \"This is a new comment\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/blogs/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"blogs",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Comment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"blog_id\": 0,\n    \"content\": \"This is a new comment\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/blogs/1/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"blogs",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Apr 2023 03:26:20 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "124"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 5,\n    \"blog_id\": 1,\n    \"content\": \"This is a new comment\",\n    \"created_at\": \"2023-04-27 23:26:20\",\n    \"updated_at\": \"2023-04-27 23:26:20\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Search Services",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\" : \"Plumber\"\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/services/search?name=plum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"services",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "plum"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Search Services",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"body\" : \"Plumber\"\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/services/search?name=plum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"services",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "plum"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:4200"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 29 Apr 2023 19:08:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "160"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"name\": \"Plumbing\",\n        \"description\": \"Sanitary and household plumbing. No sewage service.\",\n        \"category\": \"Household\",\n        \"image_name\": \"plumbing.jpg\",\n        \"price\": 100\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET Detections",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/detection?folderName=detections",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"detection"
+					],
+					"query": [
+						{
+							"key": "folderName",
+							"value": "detections"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detections",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images",
+							"type": "file",
+							"src": "vhA4Rnc7E/dog.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3600/detections",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"detections"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Detections",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": "vhA4Rnc7E/dog.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3600/detections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"detections"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.3.2 Python/3.10.3"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 May 2023 04:31:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "328"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": [\n        {\n            \"detections\": [\n                {\n                    \"class\": \"dog\",\n                    \"confidence\": 99.77\n                },\n                {\n                    \"class\": \"bicycle\",\n                    \"confidence\": 99.02\n                },\n                {\n                    \"class\": \"truck\",\n                    \"confidence\": 93.78\n                }\n            ],\n            \"image\": \"dog.jpg\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Booking",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"userId\": 1,\n    \"serviceId\": 1,\n    \"date\": \"2022-05-20\",\n    \"startTime\": \"14:00\",\n    \"endTime\": \"15:00\",\n    \"isCancelled\": false\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/updateBooking?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateBooking"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

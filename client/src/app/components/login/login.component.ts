@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { GlobalConstants } from '../../common/global-constants';
@@ -14,9 +14,9 @@ import { AppComponent } from 'src/app/app.component';
 export class LoginComponent implements OnInit {
   isLoggedIn = localStorage.getItem('isLoggedIn')
   
-  loginForm = new FormGroup({
-    username : new FormControl(''),
-    password : new FormControl(''),
+  loginForm = new UntypedFormGroup({
+    username : new UntypedFormControl(''),
+    password : new UntypedFormControl(''),
   });
 
   onSubmit() {
