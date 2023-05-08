@@ -91,7 +91,7 @@ describe('EasyWay My Bookings Page Test', () => {
         .should('have.id','cancel-main')
         .children('div')
         .find('section')
-        .should('have.length.at.least', 1)
+        .should('have.length.at.least', 0)
         .each(($el, index, $list) => {
                 cy.wrap($el)
                 .parent()

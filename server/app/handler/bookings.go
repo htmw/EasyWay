@@ -13,7 +13,7 @@ import (
 //Booking API
 
 func CreateBooking(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -124,56 +124,57 @@ func getBookingInfo(db *gorm.DB, custId int, w http.ResponseWriter, r *http.Requ
 	return &booking
 }
 
-//EditBooking API
-func EditBooking(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Methods", "PUT")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	fmt.Println("Logged EditBooking:PUT")
-	booking := model.Booking{}
+// Edit Booking API
+func UpdateBooking(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+		w.Header().Set("Content-Type", "application/json")
+    w.Header().Set("Access-Control-Allow-Methods", "PUT")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&booking); err != nil {
-		respondError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-	defer r.Body.Close()
+    fmt.Println("Logged UpdateBooking:PUT")
+    booking := model.Booking{}
 
-	// Find the booking to be updated
-	id := r.URL.Query().Get("id")
-	var existingBooking model.Booking
-	if err := db.Where("id = ?", id).First(&existingBooking).Error; err != nil {
-		respondError(w, http.StatusBadRequest, "Booking not found")
-		return
-	}
+    decoder := json.NewDecoder(r.Body)
+    if err := decoder.Decode(&booking); err != nil {
+        respondError(w, http.StatusBadRequest, err.Error())
+        return
+    }
+    defer r.Body.Close()
 
-	// Check if the updated time slot is available
-	var bookings []model.Booking
-	db.Where("service_id = ? ", booking.ServiceId).Find(&bookings)
-	for _, b := range bookings {
-		if b.Id == existingBooking.Id {
-			continue
-		}
-		start := b.StartTime
-		end := b.EndTime
-		date := b.Date
-		if booking.Date == date && booking.EndTime <= end && booking.StartTime >= start {
-			respondError(w, http.StatusInternalServerError, "Time slot unavailable")
-			return
-		}
-	}
+    // Check if the booking exists in the database
+    existingBooking := model.Booking{}
+    if err := db.First(&existingBooking, booking.Id).Error; err != nil {
+        respondError(w, http.StatusNotFound, "Booking not found")
+        return
+    }
 
-	// Update the booking
-	existingBooking.ServiceId = booking.ServiceId
-	existingBooking.UserId = booking.UserId
-	existingBooking.Date = booking.Date
-	existingBooking.StartTime = booking.StartTime
-	existingBooking.EndTime = booking.EndTime
-	if err := db.Save(&existingBooking).Error; err != nil {
-		respondError(w, http.StatusInternalServerError, err.Error())
-		return
-	}
-	respondJSON(w, http.StatusOK, existingBooking)
+    // Check if the new booking time slot is available
+    var conflictingBookings []model.Booking
+    db.Where("service_id = ? AND id != ? AND date = ?", booking.ServiceId, booking.Id, booking.Date).
+        Find(&conflictingBookings)
+    for _, b := range conflictingBookings {
+        start := b.StartTime
+        end := b.EndTime
+        date := b.Date
+        fmt.Println("date=" + date + " start=" + start + " end=" + end)
+        fmt.Println("date=" + booking.Date + " start=" + booking.StartTime + " end=" + booking.EndTime)
+        if booking.Date == date && booking.EndTime <= end && booking.StartTime >= start {
+            respondError(w, http.StatusInternalServerError, "Time slot unavailable")
+            return
+        }
+    }
+
+    // Update the booking record in the database
+    existingBooking.ServiceId = booking.ServiceId
+    existingBooking.Date = booking.Date
+    existingBooking.StartTime = booking.StartTime
+    existingBooking.EndTime = booking.EndTime
+    existingBooking.Note = booking.Note
+    if err := db.Save(&existingBooking).Error; err != nil {
+        respondError(w, http.StatusInternalServerError, err.Error())
+        return
+    }
+
+    respondJSON(w, http.StatusOK, existingBooking)
 }

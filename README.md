@@ -28,7 +28,7 @@ The EasyWay web application is built using a client-server architecture, with th
 
 The front-end of the EasyWay web application is designed using Angular JS, a popular framework for building single-page applications. The front-end design includes the following components:
 
-![Node.js Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/node.js.yml/badge.svg) - [Front-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/node.js.yml)
+![Node.js Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/node.js.yml/badge.svg) - [Front-end Smoke Testing](https://github.com/htmw/EasyWay/actions/workflows/node.js.yml)
 
 * **User Interface:** The user interface is designed to be intuitive and user-friendly, with clear and concise layouts and color schemes.
 * **Navigation:** The navigation system is designed to provide easy access to all the features of the application, with clearly labeled menus and icons.
@@ -39,7 +39,7 @@ Interactive Elements: The interactive elements, such as buttons and links, are d
 
 The back-end of the EasyWay web application is designed using Node JS, a popular framework for building scalable and performant applications. The back-end design includes the following components:
 
-![Go Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/ksharma67/EasyWay/actions/workflows/go.yml)
+![Go Automated Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml/badge.svg) - [Back-end Smoke Testing](https://github.com/htmw/EasyWay/actions/workflows/go.yml)
 
 * **RESTful API:** The back-end provides a RESTful API for the front-end to communicate with the server.
 * **Database Access:** The back-end interacts with the MySQL database system to store and retrieve data.
@@ -48,8 +48,6 @@ The back-end of the EasyWay web application is designed using Node JS, a popular
 ### Object Detection using Deep Learning
 
 One of the key features of the EasyWay web application is its ability to detect objects in images submitted by users. This is accomplished using a state-of-the-art deep learning algorithm for object detection.
-
-[![Algo](https://github.com/htmw/EasyWay/actions/workflows/algo.yml/badge.svg)](https://github.com/ksharma67/EasyWay/actions/workflows/algo.yml) - [Algo Continuous Integration](https://github.com/htmw/EasyWay/actions/workflows/algo.yml)
 
 #### How Object Detection using Deep Learning Works
 
@@ -93,11 +91,10 @@ Our application is structured as follows:
 
 ## Technology Stack:
 * Framework : Angular
-* Backend : GoLang
-* Object Detection Server - Flask
+* Backend : GoLang, Flask
 * Database : MySQL (GORM Library)
 * Version Control: Git
-* Code Editor : Visual Studio Code, Atom
+* Code Editor : Visual Studio Code
 
 ## Project Board:
 
@@ -105,7 +102,7 @@ Link : https://github.com/users/ksharma67/projects/2
 
 ## API Documentation:
 
-Link : https://github.com/htmw/EasyWay/blob/main/API%20Documentation.md
+Link : https://documenter.getpostman.com/view/23815648/2s93eSZant
 
 ## Running Backend Server:
 
@@ -134,7 +131,7 @@ go run main.go
 ```
 Ignore any errors as it will check for required datatables (show the error), then automatically creates the datatables.
 
-## Running Backend Server Algorithm Server:
+## Running Backend Server - Object Detection Server:
 
 * Clone the repository
 ```

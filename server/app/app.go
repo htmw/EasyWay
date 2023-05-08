@@ -67,7 +67,7 @@ func (a *App) setRouters() {
 	a.Post("/forgotPassword", a.ForgotPassword)
 	a.Post("/createUploadedFile", a.CreateUploadedFile)
 	a.Post("/blogs/{id}/comments", a.AddComment)
-	a.Put("/updateBooking", a.EditBooking)
+	a.Put("/updateBooking", a.UpdateBooking)
 	a.Get("/detection", a.GetDetectionImage)
 }
 
@@ -248,18 +248,18 @@ func (a *App) AddComment(w http.ResponseWriter, r *http.Request) {
 }
 
 // Handlers to update Bookings
-func (a *App) EditBooking(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("Called Routes: /bookService Method:PUT")
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-    w.Header().Set("Access-Control-Allow-Methods", "PUT")
-    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-    handler.EditBooking(a.DB, w, r)
+func (a *App) UpdateBooking(w http.ResponseWriter, r *http.Request) {
+    // Set CORS headers for the response
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+		w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+		w.Header().Set("Access-Control-Allow-Methods", "PUT")
+    w.Header().Set("Content-Type", "application/json")
+    // Handle PUT request to update the booking
+    handler.UpdateBooking(a.DB, w, r)
 }
 
 // Handlers to Get Detected Image
 func (a *App) GetDetectionImage(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("Called Routes: /bookService Method:PUT")
     w.Header().Set("Access-Control-Allow-Origin", "*")
     w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
     w.Header().Set("Access-Control-Allow-Methods", "PUT")

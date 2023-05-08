@@ -38,14 +38,16 @@ type Service struct {
 
 //Booking model for database table Booking
 type Booking struct {
-	Id          int    `gorm:"primary_key" json:"id"`
-	UserId      uint   `gorm:"not_null" json:"user_id"`
-	ServiceId   uint   `gorm:"not_null" json:"service_id"`
-	Date        string `gorm:"size:11" json:"date"`
-	StartTime   string `gorm:"size:5" json:"start_time"`
-	EndTime     string `gorm:"size:5" json:"end_time"`
-	IsCancelled bool   `gorm:"type:bool;default:false" json:"is_cancelled"`
+	Id          int     `gorm:"primary_key" json:"id"`
+	UserId      uint    `gorm:"not_null" json:"user_id"`
+	ServiceId   uint    `gorm:"not_null" json:"service_id"`
+	Date        string  `gorm:"size:11" json:"date"`
+	StartTime   string  `gorm:"size:5" json:"start_time"`
+	EndTime     string  `gorm:"size:5" json:"end_time"`
+	IsCancelled bool    `gorm:"type:bool;default:false" json:"is_cancelled"`
+	Note        *string `gorm:"size:255" json:"note,omitempty"`
 }
+
 
 //City model for database table City Service Mapping
 type CityServiceMapping struct {

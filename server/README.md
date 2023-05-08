@@ -1,4 +1,4 @@
-# Object Detection with Flask and Tensorflow (APIs and Detections)
+# Object Detection with Flask and Tensorflow 2.0 (APIs and Detections)
 The algorithm that uses deep convolutional neural networks to perform object detection. This repository implements the algorithm using TensorFlow 2.0 and creates two easy-to-use APIs that you can integrate into web or mobile applications. <br>
 
 ## Getting started

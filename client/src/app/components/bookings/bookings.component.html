@@ -25,13 +25,36 @@
                         <h5>{{myBookingsDesc[i]}}</h5>
                         <p>{{serviceB['date']}} {{serviceB['start_time']}} to {{serviceB['end_time']}}</p>
                         <ul class="actions special">
-                            <li><a class="button alt btn btn-danger" (click)="cancelBooking(serviceB['id'])">Cancel</a>
-                            </li>
+                            <li><a class="button alt btn btn-danger" (click)="cancelBooking(serviceB['id'])">Cancel</a></li>
+                            <li><button class="button alt btn btn-primary" (click)="showUpdateBookingDialog(serviceB)">Update</button></li>
                         </ul>
                     </section>
                 </div>
             </div>
         </section>
+        <!-- Update Booking Form -->
+        <div *ngIf="updateBookingDialogVisible" class="dialog-overlay">
+          <div class="dialog-content">
+            <h3>Update Booking</h3>
+            <form (ngSubmit)="updateBooking()" #updateBookingForm="ngForm">
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" [(ngModel)]="selectedBooking.date" required>
+              </div>
+              <div class="form-group">
+                <label for="start-time">Start Time</label>
+                <input type="time" class="form-control" id="start-time" name="start-time" [(ngModel)]="selectedBooking.startTime" required>
+              </div>
+              <div class="form-group">
+                <label for="note">Note</label>
+                <textarea class="form-control" id="note" name="note" [(ngModel)]="selectedBooking.note"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!updateBookingForm.valid">Update</button>
+              <button type="button" class="btn btn-secondary" (click)="closeUpdateBookingDialog()">Cancel</button>
+            </form>
+          </div>
+        </div>
+
         <!-- Cancelled bookings section -->
         <h3>Cancelled bookings</h3>
 
