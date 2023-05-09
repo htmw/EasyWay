@@ -1,1 +1,6 @@
 Deliverable[[:space:]]8.pptx filter=lfs diff=lfs merge=lfs -text
+Cucumber[[:space:]]Testing.mp4 filter=lfs diff=lfs merge=lfs -text
+Cypress[[:space:]]Testing.mp4 filter=lfs diff=lfs merge=lfs -text
+Deliverable[[:space:]]8.mp4 filter=lfs diff=lfs merge=lfs -text
+Demo[[:space:]]6.mp4 filter=lfs diff=lfs merge=lfs -text
+Figma.mp4 filter=lfs diff=lfs merge=lfs -text
