@@ -18,10 +18,10 @@ jobs:
       run: |
         cd server
         pip install -r requirements.txt
-        wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weights
-        wget https://pjreddie.com/media/files/yolov3-tiny.weights -O weights/yolov3-tiny.weights
+#        wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weights
+#        wget https://pjreddie.com/media/files/yolov3-tiny.weights -O weights/yolov3-tiny.weights
         python load_weights.py
-        python load_weights.py --weights ./weights/yolov3-tiny.weights --output ./weights/yolov3-tiny.tf --tiny
+#        python load_weights.py --weights ./weights/yolov3-tiny.weights --output ./weights/yolov3-tiny.tf --tiny
     - name: Run the app
       run: |
         cd server
