@@ -18,7 +18,7 @@ jobs:
       run: |
         cd server
         pip install -r requirements.txt
-        wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weights
+        wget https://pjreddie.com/media/files/yolov3.weights -O weights/yolov3.weight
         python load_weights.py
     - name: Run the app
       run: |
